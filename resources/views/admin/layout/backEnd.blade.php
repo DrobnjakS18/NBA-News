@@ -1,0 +1,17 @@
+@include('admin.partials.head')
+@include('admin.partials.nav')
+@include('admin.partials.side_bar')
+
+        @yield('users')
+        @yield('gallery')
+        @yield('news')
+        @yield('category')
+        @yield('video')
+        @yield('activities')
+        @yield('update_form')
+        @yield('gallery_update_form')
+        @yield('news_update_form')
+        @yield('cat_update_form')
+        @yield('video_update_form')
+
+@include('admin.partials.footer')
