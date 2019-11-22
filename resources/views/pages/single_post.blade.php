@@ -314,7 +314,7 @@
                     }
                 }
             });
-        })
+        });
 
         $('#btn_modal_reply').click(function () {
 
@@ -348,7 +348,7 @@
                     }
                 }
             });
-        })
+        });
 
         function update_com(id) {
 
