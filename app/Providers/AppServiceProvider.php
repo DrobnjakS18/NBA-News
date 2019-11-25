@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace NbaNews\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

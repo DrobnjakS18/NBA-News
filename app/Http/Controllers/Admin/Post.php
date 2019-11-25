@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace NbaNews\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseContoller;
-use App\Http\Requests\PostRequest;
-use App\Model\Category;
-use App\Model\Posts;
-use App\Resize_picture;
+use NbaNews\Http\Controllers\BaseContoller;
+use NbaNews\Http\Requests\PostRequest;
+use NbaNews\Model\Category;
+use NbaNews\Model\Posts;
+use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use NbaNews\Http\Controllers\Controller;
 
 class Post extends BaseContoller
 {

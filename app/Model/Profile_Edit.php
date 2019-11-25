@@ -6,7 +6,7 @@
  * Time: 7:16 PM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class Profile_Edit

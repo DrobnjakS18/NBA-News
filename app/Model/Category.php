@@ -6,7 +6,7 @@
  * Time: 7:12 PM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class Category

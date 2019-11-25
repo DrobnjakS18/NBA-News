@@ -6,7 +6,7 @@
  * Time: 2:45 PM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class VideoModel

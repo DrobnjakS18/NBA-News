@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace NbaNews\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseContoller;
+use NbaNews\Http\Controllers\BaseContoller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use NbaNews\Http\Controllers\Controller;
 
 class Category extends BaseContoller
 {
@@ -15,7 +15,7 @@ class Category extends BaseContoller
      */
     public function index()
     {
-        $category = new \App\Model\Category();
+        $category = new \NbaNews\Model\Category();
 
         $this->data['category'] = $category->AllCategory();
 
@@ -46,7 +46,7 @@ class Category extends BaseContoller
             'title' => 'required|min:2',
         ]);
 
-        $insert_cat = new \App\Model\Category();
+        $insert_cat = new \NbaNews\Model\Category();
 
         try{
             $insert_cat->name = $request->title;
@@ -80,7 +80,7 @@ class Category extends BaseContoller
      */
     public function edit($id)
     {
-        $one_cat = new \App\Model\Category();
+        $one_cat = new \NbaNews\Model\Category();
 
         $this->data['one_cat'] = $one_cat->getOne($id);
 
@@ -101,7 +101,7 @@ class Category extends BaseContoller
             'title' => 'required|min:2',
         ]);
 
-        $update_cat = new \App\Model\Category();
+        $update_cat = new \NbaNews\Model\Category();
 
         $update_cat->name = $request->title;
 
@@ -125,7 +125,7 @@ class Category extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_cat = new \App\Model\Category();
+        $delete_cat = new \NbaNews\Model\Category();
 
 
         try{

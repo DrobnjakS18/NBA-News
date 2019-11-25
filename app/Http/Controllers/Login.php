@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace NbaNews\Http\Controllers;
 
-use App\Model\Users;
-use App\User;
+use NbaNews\Model\Users;
+use NbaNews\User;
 use Illuminate\Http\Request;
 
 class Login extends BaseContoller

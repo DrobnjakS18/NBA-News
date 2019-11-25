@@ -1,31 +1,30 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace NbaNews\Http\Controllers;
 
-
-use App\Model\Posts;
-use App\Model\Profile_Edit;
+use NbaNews\Model\Posts;
+use NbaNews\Model\Profile_Edit;
 use Illuminate\Http\Request;
 
 class Profile extends BaseContoller
 {
 
 
-    public function index($username){
-
-
+    public function index($username)
+    {
         $commented_posts = new Posts();
 
         $this->data['commmented_views'] = $commented_posts->AllPostByComments($username);
 
-        return view('pages.profile',$this->data);
+        return view('pages.profile', $this->data);
     }
 
-    public function editPic(Request $request,$id){
+    public function editPic(Request $request, $id)
+    {
 
          $request->validate([
             'edit_picture' => 'required|file|mimes:jpg,jpeg,png|max:2000'
-        ]);
+         ]);
 
          $pic = $request->file('edit_picture');
 
@@ -34,8 +33,7 @@ class Profile extends BaseContoller
 
 
          try{
-
-             $pic->move(public_path('images/profile_pic'),$picName);
+          $pic->move(public_path('images/profile_pic'),$picName);
 
              $pic_name = 'images/profile_pic/'.$picName;
              $user = new Profile_Edit();
@@ -45,14 +43,13 @@ class Profile extends BaseContoller
              $user->EditPicture();
 
              return redirect()->back()->with('success_edit','Successfully edit profile picture');
-         } catch (\Exception $e){
-
+         } catch (\Exception $e) {
              \Log::critical('Failed to edit picture error '.$e->getMessage());
              return redirect()->back()->with('failed_edit','Application is not working, please come back later');
          }
 
     }
-    public function editProfile(Request $request,$id) {
+    public function editProfile(Request $request, $id) {
 
         $request->validate([
 
@@ -78,7 +75,7 @@ class Profile extends BaseContoller
               return $date;
 
 //              return redirect()->back()->with('success_edit','Successfully edit profile info');
-          } catch (\Exception $e){
+          } catch (\Exception $e) {
                 \Log::critical('Failed to edit account settings error'.$e->getMessage());
           }
 

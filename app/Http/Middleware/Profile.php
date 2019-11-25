@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Middleware;
+namespace NbaNews\Http\Middleware;
 
 use Closure;
 

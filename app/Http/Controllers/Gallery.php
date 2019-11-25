@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace NbaNews\Http\Controllers;
 
-use App\Model\Gallery_modul;
-use App\Resize_picture;
+use NbaNews\Model\Gallery_modul;
+use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
 
 class Gallery extends BaseContoller

@@ -6,7 +6,7 @@
  * Time: 6:17 PM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class Gallery_modul

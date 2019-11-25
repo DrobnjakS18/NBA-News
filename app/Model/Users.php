@@ -6,7 +6,7 @@
  * Time: 12:51 AM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class Users

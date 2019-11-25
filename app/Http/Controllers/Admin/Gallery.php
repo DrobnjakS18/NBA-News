@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace NbaNews\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseContoller;
-use App\Model\Gallery_modul;
-use App\Resize_picture;
+use NbaNews\Http\Controllers\BaseContoller;
+use NbaNews\Model\Gallery_modul;
+use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use NbaNews\Http\Controllers\Controller;
 
 class Gallery extends BaseContoller
 {

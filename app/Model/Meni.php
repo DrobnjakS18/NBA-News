@@ -6,7 +6,7 @@
  * Time: 1:56 AM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class Meni

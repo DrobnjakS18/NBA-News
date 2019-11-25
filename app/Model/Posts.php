@@ -6,7 +6,7 @@
  * Time: 1:51 AM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 class Posts

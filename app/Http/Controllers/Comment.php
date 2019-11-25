@@ -6,9 +6,9 @@
  * Time: 7:53 PM
  */
 
-namespace App\Http\Controllers;
-use App\Model\Comments;
-use App\Model\Users;
+namespace NbaNews\Http\Controllers;
+use NbaNews\Model\Comments;
+use NbaNews\Model\Users;
 use Illuminate\Http\Request;
 
 class Comment extends BaseContoller

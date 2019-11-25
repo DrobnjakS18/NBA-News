@@ -6,7 +6,7 @@
  * Time: 11:37 PM
  */
 
-namespace App\Model;
+namespace NbaNews\Model;
 
 
 

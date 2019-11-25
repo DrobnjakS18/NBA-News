@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace NbaNews\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseContoller;
-use App\User;
+use NbaNews\Http\Controllers\BaseContoller;
+use NbaNews\User;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use NbaNews\Http\Controllers\Controller;
 
 class Users extends BaseContoller
 {
@@ -16,7 +16,7 @@ class Users extends BaseContoller
      */
     public function index()
     {
-        $users = new \App\Model\Users();
+        $users = new \NbaNews\Model\Users();
 
         $this->data['users'] = $users->getAll();
 
@@ -55,7 +55,7 @@ class Users extends BaseContoller
         ]);
 
 
-        $reg = new \App\Model\Users();
+        $reg = new \NbaNews\Model\Users();
         $reg->first = $request->firstName;
         $reg->last = $request->LastName;
         $reg->email = $request->email;
@@ -99,7 +99,7 @@ class Users extends BaseContoller
 
 
 
-        $users = new \App\Model\Users();
+        $users = new \NbaNews\Model\Users();
 
         $this->data['role'] = $users->roles();
 
@@ -130,7 +130,7 @@ class Users extends BaseContoller
     public function update(Request $request, $id)
     {
 
-        $update_user = new \App\Model\Users();
+        $update_user = new \NbaNews\Model\Users();
 
         if($request->password == null && $request->picture == null){
 
@@ -290,7 +290,7 @@ class Users extends BaseContoller
     public function destroy($id)
     {
 
-        $delete_user = new \App\Model\Users();
+        $delete_user = new \NbaNews\Model\Users();
 
 
         try{

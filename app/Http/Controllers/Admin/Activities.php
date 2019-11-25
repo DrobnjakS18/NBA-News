@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace NbaNews\Http\Controllers\Admin;
 
-use App\Http\Controllers\BaseContoller;
+use NbaNews\Http\Controllers\BaseContoller;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use NbaNews\Http\Controllers\Controller;
 
 class Activities extends BaseContoller
 {
 
     public function index(){
 
-        $act = new \App\Model\Users();
+        $act = new \NbaNews\Model\Users();
 
 
         $this->data['activities'] = $act->getAllActivities();
@@ -24,7 +24,7 @@ class Activities extends BaseContoller
 
             $day = $request->date;
 
-           $date = new \App\Model\Users();
+           $date = new \NbaNews\Model\Users();
 
            try{
                 $dat_activities = $date->filterDate($day);

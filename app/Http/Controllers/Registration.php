@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace NbaNews\Http\Controllers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use App\Model\Users;
+use NbaNews\Model\Users;
 
 class Registration extends BaseContoller
 {

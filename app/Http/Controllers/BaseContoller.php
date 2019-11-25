@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace NbaNews\Http\Controllers;
 
-use App\Model\Meni;
-use App\Model\Posts;
-use App\Model\Users;
+use NbaNews\Model\Meni;
+use NbaNews\Model\Posts;
+use NbaNews\Model\Users;
 use Illuminate\Http\Request;
 
 class BaseContoller extends Controller

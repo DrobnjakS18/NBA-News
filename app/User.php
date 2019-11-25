@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace NbaNews;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;

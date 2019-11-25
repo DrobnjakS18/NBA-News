@@ -6,7 +6,7 @@
  * Time: 7:51 PM
  */
 
-namespace App;
+namespace NbaNews;
 
 
 class Resize_picture

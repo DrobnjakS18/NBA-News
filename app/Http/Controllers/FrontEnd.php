@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace NbaNews\Http\Controllers;
 
-use App\Model\Comments;
-use App\Model\Posts;
-use App\Model\Users;
-use App\Model\VideoModel;
+use NbaNews\Model\Comments;
+use NbaNews\Model\Posts;
+use NbaNews\Model\Users;
+use NbaNews\Model\VideoModel;
 use Illuminate\Http\Request;
 
 class FrontEnd extends BaseContoller
