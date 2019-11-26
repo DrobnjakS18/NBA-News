@@ -6,7 +6,7 @@ use NbaNews\Model\Users;
 use NbaNews\User;
 use Illuminate\Http\Request;
 
-class Login extends BaseContoller
+class LoginController extends BaseContoller
 {
 
     public function create()
@@ -18,33 +18,33 @@ class Login extends BaseContoller
 
         $username = $request->username;
         $pass = $request->pass;
-        $log_obj = new Users();
+        $logObj = new User();
 
-        $log = $log_obj->log($username,$pass);
+        $log = $logObj->log($username,$pass);
 
         session(['user' => $log]);
 
         if(session('user')){
 
-            $activities = new Users();
+            $activities = new User();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "User ".session('user')->username." logged in";
+            $activities->text = "Users ".session('user')->username." logged in";
 
             $activities->insertActivities();
 
             return redirect('/')->with('login_success',"Welcome ".session('user')->username);
         }else {
             \Log::critical('Ip address '.$request->ip().', user not found');
-            return redirect()->back()->with('login_error',"User not found");
+            return redirect()->back()->with('login_error',"Users not found");
         }
 
     }
 
     public function logout(){
 
-            $activities = new Users();
+            $activities = new User();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "User ".session('user')->username." logout.";
+            $activities->text = "Users ".session('user')->username." logout.";
 
             try{
                 $activities->insertActivities();

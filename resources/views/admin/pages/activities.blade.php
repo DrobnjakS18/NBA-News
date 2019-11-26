@@ -68,7 +68,7 @@
                         "                            <thead>\n" +
                         "                            <tr>\n" +
                         "                                <th>Date</th>\n" +
-                        "                                <th>Activities</th>\n" +
+                        "                                <th>ActivityController</th>\n" +
                         "                            </tr>\n" +
                         "                            </thead>";
 

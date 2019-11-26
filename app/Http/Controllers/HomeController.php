@@ -2,88 +2,71 @@
 
 namespace NbaNews\Http\Controllers;
 
-use NbaNews\Model\Comments;
-use NbaNews\Model\Posts;
+use NbaNews\Model\Comment;
+use NbaNews\Model\Post;
 use NbaNews\Model\Users;
 use NbaNews\Model\VideoModel;
 use Illuminate\Http\Request;
 
-class FrontEnd extends BaseContoller
+class HomeController extends BaseContoller
 {
-
-
-
     public function index()
     {
-        $posts = new Posts();
+        $posts = new Post();
         $res = $posts->PostsPagination();
         $this->data['most'] =$posts->PostsByVisit();
 
-        $array_news= $posts->getAllByLatest(1);
+        $arrayNews= $posts->getAllByLatest(1);
 
-        $this->data['latest'] = $array_news;
+        $this->data['latest'] = $arrayNews;
 
         $this->data['post_game'] = $posts->getAllByPost(2);
         $this->data['pagination'] = $res;
 
         $video = new VideoModel();
 
-        $array_videos = $video->getAllVideos()->toArray();
+        $arrayVideos = $video->getAllVideos()->toArray();
 
-        $random_video = \Arr::random($array_videos);
+        $randomVideo = \Arr::random($arrayVideos);
 
-        $this->data['random_video'] = $random_video;
+        $this->data['random_video'] = $randomVideo;
 
         return view("pages.home", $this->data);
     }
 
 
-    public function single($id, $user_id = null)
+    public function single($id, $userID = null)
     {
-
-        $visited = new Posts();
-
+        $visited = new Post();
 
         try {
-            $visited->VisitedPost($id, $user_id);
+            $visited->VisitedPost($id, $userID);
         } catch (\Exception $e) {
             \Log::critical('Visiting post counter failed error'.$e->getMessage());
         }
-
 
         $this->data['count_visits'] =$visited->visitedCounter($id);
 
         $this->data['most'] =$visited->PostsByVisit();
 
-        $com = new Comments();
+        $com = new Comment();
 
         $this->data['count_comments'] = $com->CountCommentsForPost($id);
-
         $this->data['comments'] =$com->getAllByPost($id);
+
         $this->data['reply'] = $com->getAllReplies();
 
-//        dd($com->getAllReplies());
-
-
-        $posts = new Posts();
+        $posts = new Post();
         $this->data['post'] = $posts->getOne($id);
 
-
         $video = new VideoModel();
-
-        $array_videos = $video->getAllVideos()->toArray();
-
-        $random_video = \Arr::random($array_videos);
-
+        $arrayVideos = $video->getAllVideos()->toArray();
+        $random_video = \Arr::random($arrayVideos);
         $this->data['random_video'] = $random_video;
-
         $this->data['post_game'] = $posts->getAllByPost(2);
-
 
         return view('pages.single_post', $this->data);
     }
-
-
 
     public function about()
     {
@@ -97,16 +80,13 @@ class FrontEnd extends BaseContoller
             'search_value' => 'required|max:140'
         ]);
 
-        $posts = new Posts();
-
+        $posts = new Post();
 
         try {
             $search = $posts->LikePosts($request->search_value);
         } catch (\Exception $e) {
             \Log::critical('Search failed error'.$e->getMessage());
         }
-
-
 
         if ($search->isEmpty()) {
                     $this->data['search_not_found'] = "No Resaults";

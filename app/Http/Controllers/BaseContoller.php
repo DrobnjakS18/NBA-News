@@ -3,7 +3,7 @@
 namespace NbaNews\Http\Controllers;
 
 use NbaNews\Model\Meni;
-use NbaNews\Model\Posts;
+use NbaNews\Model\Post;
 use NbaNews\Model\Users;
 use Illuminate\Http\Request;
 
@@ -13,11 +13,11 @@ class BaseContoller extends Controller
 
     public  function  __construct(){
 
-        $meni_obj = new Meni();
-        $posts = new Posts();
+        $meniObj = new Meni();
+        $posts = new Post();
         $users = new Users();
         $this->data['posts'] = $posts->getAll();
-        $this->data['meni'] = $meni_obj->getAllMeni();
+        $this->data['meni'] = $meniObj->getAllMeni();
         $this->data['role'] = $users->roles();
     }
 

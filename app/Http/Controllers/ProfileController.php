@@ -2,26 +2,23 @@
 
 namespace NbaNews\Http\Controllers;
 
-use NbaNews\Model\Posts;
+use NbaNews\Model\Post;
 use NbaNews\Model\Profile_Edit;
 use Illuminate\Http\Request;
 
-class Profile extends BaseContoller
+class ProfileController extends BaseContoller
 {
-
-
     public function index($username)
     {
-        $commented_posts = new Posts();
+        $commentedPosts = new Post();
 
-        $this->data['commmented_views'] = $commented_posts->AllPostByComments($username);
+        $this->data['commmented_views'] = $commentedPosts->AllPostByComments($username);
 
         return view('pages.profile', $this->data);
     }
 
     public function editPic(Request $request, $id)
     {
-
          $request->validate([
             'edit_picture' => 'required|file|mimes:jpg,jpeg,png|max:2000'
          ]);

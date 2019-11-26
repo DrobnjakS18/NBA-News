@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: DrobnjakS
+ * Users: DrobnjakS
  * Date: 3/6/2019
  * Time: 11:37 PM
  */
@@ -12,7 +12,7 @@ namespace NbaNews\Model;
 
 use mysql_xdevapi\Exception;
 
-class Comments
+class Comment
 {
     public $com;
     public $user_id;

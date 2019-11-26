@@ -7,7 +7,7 @@ use NbaNews\Model\VideoModel;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
 
-class Video extends BaseContoller
+class VideoController extends BaseContoller
 {
     /**
      * Display a listing of the resource.
@@ -63,7 +63,7 @@ class Video extends BaseContoller
 
          }catch(\Exception $e){
 
-             \Log::critical('Insert Video error '.$e->getMessage());
+             \Log::critical('Insert VideoController error '.$e->getMessage());
              return redirect()->back()->with('insert_video_error','Application is not working, please come back later');
          }
 
@@ -125,7 +125,7 @@ class Video extends BaseContoller
 
         }catch(\Exception $e){
 
-            \Log::critical('Insert Video error '.$e->getMessage());
+            \Log::critical('Insert VideoController error '.$e->getMessage());
             return redirect('/admin_video')->with('update_video_error','Application is not working, please come back later');
         }
 

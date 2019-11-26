@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: DrobnjakS
+ * Users: DrobnjakS
  * Date: 3/3/2019
  * Time: 1:51 AM
  */
@@ -9,7 +9,7 @@
 namespace NbaNews\Model;
 
 
-class Posts
+class Post
 {
     public $id;
     public $picture;

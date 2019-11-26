@@ -5,7 +5,7 @@ namespace NbaNews\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-class Contact extends BaseContoller
+class ContactController extends BaseContoller
 {
 
     public function index()
@@ -22,7 +22,7 @@ class Contact extends BaseContoller
             'message' => 'required|min:3'
         ]);
 
-        $mail_data = array(
+        $mailData = array(
 
             'name' => $request->name,
             'mail' => $request->mail,
@@ -32,11 +32,11 @@ class Contact extends BaseContoller
 
         try {
 
-            Mail::send('email.contact',$mail_data,function ($message) use ($mail_data){
+            Mail::send('email.contact',$mailData,function ($message) use ($mailData){
 
-                $message->from($mail_data['mail']);
+                $message->from($mailData['mail']);
                 $message->to('drobnjak-85b1a2@inbox.mailtrap.io');
-                $message->subject($mail_data['subject']);
+                $message->subject($mailData['subject']);
 
             });
 

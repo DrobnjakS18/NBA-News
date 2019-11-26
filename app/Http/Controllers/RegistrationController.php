@@ -6,7 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use NbaNews\Model\Users;
 
-class Registration extends BaseContoller
+class RegistrationController extends BaseContoller
 {
     /**
      * Display a listing of the resource.
@@ -60,7 +60,7 @@ class Registration extends BaseContoller
         catch(QueryException $e){
 
             \Log::critical('Registratin failed'.$e->getMessage());
-            return redirect()->back()->with('reg_error',"Registration failed, please come back later");
+            return redirect()->back()->with('reg_error',"RegistrationController failed, please come back later");
         }
 
     }

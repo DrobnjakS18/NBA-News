@@ -6,7 +6,7 @@ use NbaNews\Http\Controllers\BaseContoller;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
 
-class Activities extends BaseContoller
+class ActivityController extends BaseContoller
 {
 
     public function index(){

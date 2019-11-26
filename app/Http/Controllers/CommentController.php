@@ -1,17 +1,17 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: DrobnjakS
+ * Users: DrobnjakS
  * Date: 3/6/2019
  * Time: 7:53 PM
  */
 
 namespace NbaNews\Http\Controllers;
-use NbaNews\Model\Comments;
+use NbaNews\Model\Comment;
 use NbaNews\Model\Users;
 use Illuminate\Http\Request;
 
-class Comment extends BaseContoller
+class CommentController extends BaseContoller
 {
 
     public function store(Request $request,$id){
@@ -20,27 +20,27 @@ class Comment extends BaseContoller
 
             'comment_area' => 'required|max:255'
         ]);
-        $com_val = $request->comment_area;
-        $user_id = $request->user_id;
+        $comVal = $request->comment_area;
+        $userID = $request->user_id;
 
 
-        $com = new Comments();
+        $com = new Comment();
 
         $com->id = $id;
-        $com->com = $com_val;
-        $com->user_id = $user_id;
+        $com->com = $comVal;
+        $com->user_id = $userID;
 
         if(session('user')){
             $activities = new Users();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "User ".session('user')->username." commented ".$com_val;
+            $activities->text = "Users ".session('user')->username." commented ".$comVal;
 
             try{
                 $activities->insertActivities();
             }
             catch(\Exception $e){
 
-                \Log::critical('Comment activities failed error'.$e->getMessage());
+                \Log::critical('CommentController activities failed error'.$e->getMessage());
             }
         }
 
@@ -52,7 +52,7 @@ class Comment extends BaseContoller
             return redirect()->back()->with('sub_comment_success','Thanks for commenting');
         }catch(\Exception $e){
 
-            \Log::info('Comment inser failed error'.$e->getMessage());
+            \Log::info('CommentController inser failed error'.$e->getMessage());
             return redirect()->back()->with('sub_comment_error','Application is not working, please come back later');
         }
 
@@ -61,13 +61,13 @@ class Comment extends BaseContoller
 
     public function destroy($id){
 
-        $delete = new Comments();
+        $delete = new Comment();
 
         $delete->id = $id;
 
             $activities = new Users();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "User ".session('user')->username." deleted his comment ";
+            $activities->text = "Users ".session('user')->username." deleted his comment ";
 
             try{
                 $activities->insertActivities();
@@ -98,7 +98,7 @@ class Comment extends BaseContoller
             'text' => 'required|max:255'
         ]);
 
-        $update = new Comments();
+        $update = new Comment();
 
         $update->com = $request->text;
 
@@ -125,7 +125,7 @@ class Comment extends BaseContoller
            'text_rep' => 'required|max:255'
        ]);
 
-        $replay = new Comments();
+        $replay = new Comment();
 
         $replay->com = $request->text_rep;
         $replay->user_id = $request->user_id;
@@ -134,7 +134,7 @@ class Comment extends BaseContoller
         if(session('user')){
             $activities = new Users();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "User ".session('user')->username." reply ".$request->text_rep;
+            $activities->text = "Users ".session('user')->username." reply ".$request->text_rep;
 
             try{
                 $activities->insertActivities();
@@ -154,14 +154,14 @@ class Comment extends BaseContoller
             return redirect()->back();
         }catch (\Exception $e){
 
-            \Log::critical('Comment inser failed error'.$e->getMessage());
+            \Log::critical('CommentController inser failed error'.$e->getMessage());
             return redirect()->back()->with('sub_comment_error','Application is not working, please come back later');
         }
     }
 
     public function deleteReply($id){
 
-        $del = new Comments();
+        $del = new Comment();
 
         try{
             $del->delReply($id);
@@ -184,7 +184,7 @@ class Comment extends BaseContoller
         ]);
 
 
-        $updReply = new Comments();
+        $updReply = new Comment();
 
         $updReply->com = $request->text;
 

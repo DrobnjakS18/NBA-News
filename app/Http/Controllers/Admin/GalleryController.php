@@ -8,7 +8,7 @@ use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
 
-class Gallery extends BaseContoller
+class GalleryController extends BaseContoller
 {
     /**
      * Display a listing of the resource.

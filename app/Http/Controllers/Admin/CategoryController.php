@@ -6,7 +6,7 @@ use NbaNews\Http\Controllers\BaseContoller;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
 
-class Category extends BaseContoller
+class CategoryController extends BaseContoller
 {
     /**
      * Display a listing of the resource.

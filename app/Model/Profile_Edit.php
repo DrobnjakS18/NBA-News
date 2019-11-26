@@ -1,7 +1,7 @@
 <?php
 /**
  * Created by PhpStorm.
- * User: DrobnjakS
+ * Users: DrobnjakS
  * Date: 3/5/2019
  * Time: 7:16 PM
  */
@@ -13,7 +13,7 @@ class Profile_Edit
 {
 
     public $id;
-    public  $picture;
+    public $picture;
     public $first;
     public $last;
     public $email;

@@ -17,7 +17,7 @@ class Profile
     {
 
         if(!session('user')){
-            \Log::critical('User address '.$request->ip().' tried to access Profile page');
+            \Log::critical('Users address '.$request->ip().' tried to access ProfileController page');
             return abort(404);
         }
 

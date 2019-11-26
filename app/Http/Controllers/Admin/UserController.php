@@ -7,7 +7,7 @@ use NbaNews\User;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
 
-class Users extends BaseContoller
+class UserController extends BaseContoller
 {
     /**
      * Display a listing of the resource.

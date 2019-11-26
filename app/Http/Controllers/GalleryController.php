@@ -6,7 +6,7 @@ use NbaNews\Model\Gallery_modul;
 use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
 
-class Gallery extends BaseContoller
+class GalleryController extends BaseContoller
 {
     /**
      * Display a listing of the resource.
@@ -64,10 +64,10 @@ class Gallery extends BaseContoller
             $resize->malaSlika(public_path('images/gallery').'\\'.$fileName,public_path('images/small_images').'\\small_'.$fileName,100,70);
 
             $picture = 'images/gallery/'.$fileName;
-            $small_picture = 'images/small_images/small_'.$fileName;
+            $smallPicture = 'images/small_images/small_'.$fileName;
 
             $gallery->picture = $picture;
-            $gallery->picture_small = $small_picture;
+            $gallery->picture_small = $smallPicture;
             $gallery->alt = $file->getClientOriginalName();
 
             $gallery->insertGalleryPic();

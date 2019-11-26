@@ -5,12 +5,12 @@ namespace NbaNews\Http\Controllers\Admin;
 use NbaNews\Http\Controllers\BaseContoller;
 use NbaNews\Http\Requests\PostRequest;
 use NbaNews\Model\Category;
-use NbaNews\Model\Posts;
+use NbaNews\Model\Post;
 use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
 
-class Post extends BaseContoller
+class PostController extends BaseContoller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class Post extends BaseContoller
      */
     public function index()
     {
-        $posts = new Posts();
+        $posts = new Post();
 
         $this->data['news'] = $posts->getAll();
         $cat = new Category();
@@ -80,7 +80,7 @@ class Post extends BaseContoller
 
             $small_picture = 'images/small_images/small_'.$fileName;
 
-            $insert = new Posts();
+            $insert = new Post();
 
             $insert->picture = $picture;
             $insert->small_picture = $small_picture;
@@ -123,7 +123,7 @@ class Post extends BaseContoller
      */
     public function edit($id)
     {
-        $one_post = new Posts();
+        $one_post = new Post();
 
         $this->data['one_post'] = $one_post->getOne($id);
 
@@ -153,7 +153,7 @@ class Post extends BaseContoller
             ]);
 
 
-            $update_news = new Posts();
+            $update_news = new Post();
 
 
             $update_news->headline = $request->title;
@@ -187,7 +187,7 @@ class Post extends BaseContoller
             ]);
 
 
-            $update_all = new Posts();
+            $update_all = new Post();
             $file = $request->file('picture');
 
             $fileName = $file->getClientOriginalName();
@@ -250,7 +250,7 @@ class Post extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_post = new Posts();
+        $delete_post = new Post();
 
         try{
             $delete_post->id = $id;

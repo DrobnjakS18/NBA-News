@@ -14,43 +14,43 @@
 Route::pattern('id', '[0-9]+');
 Route::pattern('user_id', '[0-9]+');
 //FRONTEND
-Route::get('/', "FrontEnd@index");
-Route::get('/post/{id}/{user_id?}',"FrontEnd@single")->name('single_post');
+Route::get('/', "HomeController@index");
+Route::get('/post/{id}/{userID?}',"HomeController@single")->name('single_post');
 
 //COMMENTS
-Route::post('/post/{id}/comment','Comment@store')->name('sub_comment');
-Route::get('/comment/{id}','Comment@destroy')->name('del_comment');
-Route::put('/comment/{id}','Comment@update')->name('update_comment');
+Route::post('/post/{id}/comment','CommentController@store')->name('sub_comment');
+Route::get('/comment/{id}','CommentController@destroy')->name('del_comment');
+Route::put('/comment/{id}','CommentController@update')->name('update_comment');
 
 //REPLY
-Route::post('/comment/{id}/reply','Comment@reply')->name('reply_comment');
-Route::get('/reply/{id}','Comment@deleteReply')->name('reply_del');
-Route::put('/reply/{id}','Comment@updateReply');
+Route::post('/comment/{id}/reply','CommentController@reply')->name('reply_comment');
+Route::get('/reply/{id}','CommentController@deleteReply')->name('reply_del');
+Route::put('/reply/{id}','CommentController@updateReply');
 
-Route::get('/about', "FrontEnd@about");
-Route::get('/search','FrontEnd@search');
+Route::get('/about', "HomeController@about");
+Route::get('/search','HomeController@search');
 
 //GALLERY
 //gallery/create - pristup formi za unos
-Route::resource('gallery','Gallery');
+Route::resource('gallery','GalleryController');
 
 //CONTACT
-Route::get('/contact', "Contact@index");
-Route::post('/contact','Contact@send');
+Route::get('/contact', "ContactController@index");
+Route::post('/contact','ContactController@send');
 
 //REGISTRATION
-Route::get('/registration', "Registration@index");
-Route::post('/registration',"Registration@store");
+Route::get('/registration', "RegistrationController@index");
+Route::post('/registration',"RegistrationController@store");
 
 //LOGIN
-Route::get('/login', "Login@create");
-Route::post('/login','Login@log');
-Route::get('/logout','Login@logout');
+Route::get('/login', "LoginController@create");
+Route::post('/login','LoginController@log');
+Route::get('/logout','LoginController@logout');
 
 //PROFILE
-Route::get('/profile/{username}','Profile@index')->name('profile')->middleware('profile')->where('username','[A-Za-z0-9][A-Za-z0-9: _-]{1,19}');
-Route::post('/profile/{id}','Profile@editPic')->name('edit_pic');
-Route::post('/profile/{id}/edit','Profile@editProfile')->name('edit_profile');
+Route::get('/profile/{username}','ProfileController@index')->name('profile')->middleware('profile')->where('username','[A-Za-z0-9][A-Za-z0-9: _-]{1,19}');
+Route::post('/profile/{id}','ProfileController@editPic')->name('edit_pic');
+Route::post('/profile/{id}/edit','ProfileController@editProfile')->name('edit_profile');
 
 //BACKEND
 
