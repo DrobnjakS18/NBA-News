@@ -5,6 +5,7 @@ namespace NbaNews\Http\Controllers\Admin;
 use NbaNews\Http\Controllers\BaseContoller;
 use NbaNews\User;
 use Illuminate\Http\Request;
+use NbaNews\Model\Users;
 use NbaNews\Http\Controllers\Controller;
 
 class UserController extends BaseContoller
@@ -16,7 +17,7 @@ class UserController extends BaseContoller
      */
     public function index()
     {
-        $users = new \NbaNews\Model\Users();
+        $users = new Users();
 
         $this->data['users'] = $users->getAll();
 
@@ -55,7 +56,7 @@ class UserController extends BaseContoller
         ]);
 
 
-        $reg = new \NbaNews\Model\Users();
+        $reg = new Users();
         $reg->first = $request->firstName;
         $reg->last = $request->LastName;
         $reg->email = $request->email;
@@ -99,7 +100,7 @@ class UserController extends BaseContoller
 
 
 
-        $users = new \NbaNews\Model\Users();
+        $users = new Users();
 
         $this->data['role'] = $users->roles();
 
@@ -130,7 +131,7 @@ class UserController extends BaseContoller
     public function update(Request $request, $id)
     {
 
-        $update_user = new \NbaNews\Model\Users();
+        $update_user = new Users();
 
         if($request->password == null && $request->picture == null){
 
@@ -290,7 +291,7 @@ class UserController extends BaseContoller
     public function destroy($id)
     {
 
-        $delete_user = new \NbaNews\Model\Users();
+        $delete_user = new Users();
 
 
         try{

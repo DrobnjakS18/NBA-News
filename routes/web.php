@@ -11,24 +11,22 @@
 |
 */
 
-Route::pattern('id', '[0-9]+');
-Route::pattern('user_id', '[0-9]+');
 //FRONTEND
 Route::get('/', "HomeController@index");
 Route::get('/post/{id}/{userID?}',"HomeController@single")->name('single_post');
+Route::get('/about', "HomeController@about");
+Route::get('/search','HomeController@search');
 
+
+Route::resource('comments','ControllerComment');
 //COMMENTS
-Route::post('/post/{id}/comment','CommentController@store')->name('sub_comment');
-Route::get('/comment/{id}','CommentController@destroy')->name('del_comment');
+//Route::post('/post/{id}/comment','CommentController@store')->name('sub_comment');
+//Route::get('/comment/{id}','CommentController@destroy')->name('del_comment');
 Route::put('/comment/{id}','CommentController@update')->name('update_comment');
-
-//REPLY
 Route::post('/comment/{id}/reply','CommentController@reply')->name('reply_comment');
 Route::get('/reply/{id}','CommentController@deleteReply')->name('reply_del');
 Route::put('/reply/{id}','CommentController@updateReply');
 
-Route::get('/about', "HomeController@about");
-Route::get('/search','HomeController@search');
 
 //GALLERY
 //gallery/create - pristup formi za unos
@@ -58,7 +56,7 @@ Route::post('/profile/{id}/edit','ProfileController@editProfile')->name('edit_pr
 
 Route::group(['middleware' => ['admin']], function () {
 
-    Route::resource('users','Admin\Users');
+    Route::resource('users','Admin\UserController');
     Route::get("/users/{id}/delete",'Admin\Users@destroy');
     Route::resource('admin_gallery','Admin\Gallery');
     Route::get("/admin_gallery/{id}/delete",'Admin\Gallery@destroy');

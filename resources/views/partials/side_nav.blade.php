@@ -1,4 +1,4 @@
-<div class="full">
+ <div class="full">
 <div class="col-md-3 top-nav">
     <div class="logo">
         <a href="/"><h1>NBA NEWS</h1>
