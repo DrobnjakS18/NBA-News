@@ -2,7 +2,7 @@
 
 namespace NbaNews\Http\Controllers;
 
-use NbaNews\Model\Gallery_modul;
+use NbaNews\Model\Gallery_model;
 use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
 
@@ -15,10 +15,7 @@ class GalleryController extends BaseContoller
      */
     public function index()
     {
-
-        $gallery = new Gallery_modul();
-
-        $this->data['gallery'] = $gallery->getAllGallery();
+        $this->data['gallery'] = Gallery_model::all();
         return view('pages.gallery',$this->data);
     }
 
@@ -46,7 +43,7 @@ class GalleryController extends BaseContoller
             'gallery_pic' => 'file|mimes:jpg,jpeg,png|max:2000|required'
         ]);
 
-        $gallery = new Gallery_modul();
+        $gallery = new Gallery_model();
 
         $gallery->name = $request->title;
 

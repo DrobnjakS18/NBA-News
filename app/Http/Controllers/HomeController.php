@@ -13,25 +13,24 @@ class HomeController extends BaseContoller
     public function index()
     {
         $posts = new Post();
-        $res = $posts->PostsPagination();
-        $this->data['most'] =$posts->PostsByVisit();
+        $mostViewed = $posts->PostsByVisit();
 
-        $arrayNews= $posts->getAllByLatest(1);
+        $latest= Post::where('cat_id',1)->get();
+        $post_game = Post::where('cat_id',2)->get();
+        $pagination = Post::paginate(4);
 
-        $this->data['latest'] = $arrayNews;
-
-        $this->data['post_game'] = $posts->getAllByPost(2);
-        $this->data['pagination'] = $res;
-
-        $video = new VideoModel();
-
-        $arrayVideos = $video->getAllVideos()->toArray();
-
+        $arrayVideos = VideoModel::all()->toArray();
         $randomVideo = \Arr::random($arrayVideos);
+        $random_video = (object)$randomVideo;
 
-        $this->data['random_video'] = $randomVideo;
-
-        return view("pages.home", $this->data);
+        return view("pages.home", [
+            'meni' => $this->data['meni'],
+            'most' => $mostViewed,
+            'latest' => $latest,
+            'post_game' => $post_game,
+            'pagination' => $pagination,
+            'random_video' => $random_video,
+        ]);
     }
 
 
@@ -59,10 +58,9 @@ class HomeController extends BaseContoller
         $posts = new Post();
         $this->data['post'] = $posts->getOne($id);
 
-        $video = new VideoModel();
-        $arrayVideos = $video->getAllVideos()->toArray();
+        $arrayVideos = VideoModel::all()->toArray();
         $random_video = \Arr::random($arrayVideos);
-        $this->data['random_video'] = $random_video;
+        $this->data['random_video'] = (object)$random_video;
         $this->data['post_game'] = $posts->getAllByPost(2);
 
         return view('pages.single_post', $this->data);

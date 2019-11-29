@@ -13,12 +13,9 @@ class BaseContoller extends Controller
 
     public  function  __construct(){
 
-        $meniObj = new Meni();
-        $posts = new Post();
-        $users = new Users();
-        $this->data['posts'] = $posts->getAll();
-        $this->data['meni'] = $meniObj->getAllMeni();
-        $this->data['role'] = $users->roles();
+        $this->data['posts'] = Post::all();
+        $this->data['meni'] = Meni::all();
+        $this->data['role'] = Users::all();
     }
 
 }
