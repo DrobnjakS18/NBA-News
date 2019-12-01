@@ -13,10 +13,10 @@ vagrant up
 
 5)Logovanje je omoguceno preko sifre:
 vagrant:vagrant
-ili 
+ili
 vagrant ssh
 
-6) Instaliramo vendore 
+6) Instaliramo vendore
 cd /var/www/project/
 composer install
 
@@ -26,7 +26,7 @@ CREATE DATABASE threedium DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_
 
 8)podesiti .env fajl po ugledu na .env.example fajl.
 
-9)app key uneti uz pomoc komande: 
+9)app key uneti uz pomoc komande:
 php artisan key:generate
 
 10(kada se sredio .env fajl onda pokrenuti sledece(tu ce biti uradjena migracija sa seedovima):
@@ -59,7 +59,7 @@ https://www.digitalocean.com/community/tutorials/how-to-install-linux-nginx-mysq
 https://www.digitalocean.com/community/tutorials/how-to-add-swap-space-on-ubuntu-18-04
 koristi brzi nacin...
 
-4)Prvo pogledaj da li je dobro sredjeno sto se tice usera. 
+4)Prvo pogledaj da li je dobro sredjeno sto se tice usera.
 If you have blank white screen try to change permission on to storage folder with following command line
 chmod -R o+w storage/ bootstrap/cache
 
