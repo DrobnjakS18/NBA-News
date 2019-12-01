@@ -30,7 +30,7 @@
 
             <script src="js/lightbox.js"></script>
             <div class="clearfix"></div>
-            {{$gallery->links()}}
+{{--            {{$gallery->links()}}--}}
         </div>
     </div>
     <div class="clearfix"> </div>

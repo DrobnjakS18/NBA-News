@@ -9,15 +9,12 @@
 namespace NbaNews\Model;
 
 
-class Category
+use Illuminate\Database\Eloquent\Model;
+
+class Category extends Model
 {
     public $id;
     public $name;
-
-    public function AllCategory(){
-
-        return \DB::table('categories')->get();
-    }
 
     public function insertCat(){
 

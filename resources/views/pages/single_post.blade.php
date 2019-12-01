@@ -106,11 +106,16 @@
                                 </div>
                                     <div class="clearfix"> </div>
                             </div>
-
                         </div>
 
                         @if($com->id_u == session('user')->UserId)
-                        <li><a href="{{route('del_comment',['id'=>$com->com_id])}}">Delete</a></li>
+                        <li>
+                            <form action="{{route('comments.destroy',['id'=>$com->com_id])}}" method="post">
+                                @method('DELETE')
+                                @csrf
+                                <button >Delete</button>
+                            </form>
+                        </li>
                         <li><a data-toggle="modal" href="#myModal">Update</a></li>
                                 <div id="myModal" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
@@ -121,13 +126,10 @@
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <h4 class="modal-title">Update Comment</h4>
                                             </div>
-                                            <div class="modal-body">
-                                                <textarea rows="4" cols="67" id="update_comment_modal" >{{$com->com}}</textarea>
-                                                <input type="hidden" id="com_id" value="{{$com->com_id}}"/>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_modal_update" onclick="update_com({{$com->com_id}})">Save</button>
-                                            </div>
+                                            <form action=""></form>
+                                            <textarea name="update-field">
+                                                {{$com->com}}
+                                            </textarea>
                                         </div>
 
                                     </div>
@@ -194,9 +196,10 @@
         @if(session('user'))
         <div class="coment-form">
             <h4>Leave your comment</h4>
-            <form action="{{route('sub_comment',['id' => $post->id])}}" method="POST">
+            <form action="{{route('comments.store')}}" method="POST">
                 <textarea name="comment_area" id="comment_area" placeholder="Your comment..."></textarea>
                 <input type="hidden" name="user_id" id="user_id" value="{{session('user')->UserId}}"/>
+                <input type="hidden" name="post_id" id="post_id" value="{{$post->id}}"/>
                 <input type="submit" id="sub_com" value="submit comment"/>
             </form>
         </div>
@@ -209,13 +212,7 @@
         @endif
         <div class="clearfix"></div>
     </div>
-
     </div>
-
-
-
-
-
 
     <!--//banner-->
     <!--//banner-section-->
@@ -241,7 +238,7 @@
                                 <a href="{{route('single_post',['id'=>$late->id])}}"><img src="{{asset($late->small_picture)}}" class="img-responsive" ></a>
                             </div>
                             <div class="col-md-9 item-details">
-                                <h5 class="inner two"><a href="{{route('single_post',['id'=>$late->id])}}">{{$late->headline}}r</a></h5>
+                                <h5 class="inner two"><a href="{{route('single_post',['id'=>$late->id])}}">{{$late->headline}}</a></h5>
                                 <div class="td-post-date two"><i class="glyphicon glyphicon-time"></i>{{date('M d,Y',strtotime($late->date_published))}} <a href="#"><i class="glyphicon glyphicon-eye-open"></i>{{$late->BrojPregreda}}</a></div>
                             </div>
                             <div class="clearfix"></div>

@@ -14,87 +14,43 @@ use Illuminate\Http\Request;
 class CommentController extends BaseContoller
 {
 
-    public function store(Request $request,$id){
+//
+//    public function destroy($id)
+//    {
+//
+//        $delete = new Comment();
+//
+//        $delete->id = $id;
+//
+//            $activities = new Users();
+//            $activities->user_id = session('user')->UserId;
+//            $activities->text = "Users ".session('user')->username." deleted his comment ";
+//
+//            try{
+//                $activities->insertActivities();
+//            } catch (\Exception $e) {
+//
+//                \Log::critical('Reply activities failed error'.$e->getMessage());
+//            }
+//
+//
+//
+//
+//        try{
+//            $delete->deleteComment();
+//
+//            return redirect()->back();
+//        } catch (\Exception $e) {
+//
+//            \Log::info('Error deleting comment '.$e->getMessage());
+//            return redirect()->back()->with('delete_error','Application is not working, please come back later');
+//        }
+//    }
+
+    public function update(Request $request,$id)
+    {
 
         $request->validate([
-
-            'comment_area' => 'required|max:255'
-        ]);
-        $comVal = $request->comment_area;
-        $userID = $request->user_id;
-
-
-        $com = new Comment();
-
-        $com->id = $id;
-        $com->com = $comVal;
-        $com->user_id = $userID;
-
-        if(session('user')){
-            $activities = new Users();
-            $activities->user_id = session('user')->UserId;
-            $activities->text = "Users ".session('user')->username." commented ".$comVal;
-
-            try{
-                $activities->insertActivities();
-            }
-            catch(\Exception $e){
-
-                \Log::critical('CommentController activities failed error'.$e->getMessage());
-            }
-        }
-
-
-
-        try{
-
-            $com->insertCom();
-            return redirect()->back()->with('sub_comment_success','Thanks for commenting');
-        }catch(\Exception $e){
-
-            \Log::info('CommentController inser failed error'.$e->getMessage());
-            return redirect()->back()->with('sub_comment_error','Application is not working, please come back later');
-        }
-
-
-    }
-
-    public function destroy($id){
-
-        $delete = new Comment();
-
-        $delete->id = $id;
-
-            $activities = new Users();
-            $activities->user_id = session('user')->UserId;
-            $activities->text = "Users ".session('user')->username." deleted his comment ";
-
-            try{
-                $activities->insertActivities();
-            }
-            catch(\Exception $e){
-
-                \Log::critical('Reply activities failed error'.$e->getMessage());
-            }
-
-
-
-
-        try{
-            $delete->deleteComment();
-
-            return redirect()->back();
-        }catch (\Exception $e){
-
-            \Log::info('Error deleting comment '.$e->getMessage());
-            return redirect()->back()->with('delete_error','Application is not working, please come back later');
-        }
-    }
-
-    public function update(Request $request,$id){
-
-        $request->validate([
-
             'text' => 'required|max:255'
         ]);
 
@@ -109,7 +65,7 @@ class CommentController extends BaseContoller
             $data['msg'] = 'Successfull update';
             return $data;
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             \Log::critical('Error updating comment '.$e->getMessage());
 
         }
@@ -118,7 +74,8 @@ class CommentController extends BaseContoller
     }
 
 
-    public function reply(Request $request,$id){
+    public function reply(Request $request,$id)
+    {
 
        $request->validate([
 
@@ -135,11 +92,9 @@ class CommentController extends BaseContoller
             $activities = new Users();
             $activities->user_id = session('user')->UserId;
             $activities->text = "Users ".session('user')->username." reply ".$request->text_rep;
-
             try{
                 $activities->insertActivities();
-            }
-            catch(\Exception $e){
+            } catch (\Exception $e) {
 
                 \Log::critical('Reply activities failed error'.$e->getMessage());
             }
@@ -148,41 +103,34 @@ class CommentController extends BaseContoller
 
 
         try{
-
             $replay->subReplayComment($id);
-
             return redirect()->back();
-        }catch (\Exception $e){
-
+        } catch (\Exception $e) {
             \Log::critical('CommentController inser failed error'.$e->getMessage());
             return redirect()->back()->with('sub_comment_error','Application is not working, please come back later');
         }
     }
 
-    public function deleteReply($id){
-
+    public function deleteReply($id)
+    {
         $del = new Comment();
 
         try{
             $del->delReply($id);
 
             return redirect()->back();
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
 
             \Log::critical('Error deleting comment '.$e->getMessage());
             return redirect()->back()->with('delete_error','Application is not working, please come back later');
         }
-
     }
 
-    public function updateReply(Request $request,$id){
-
-
+    public function updateReply(Request $request,$id)
+    {
         $request->validate([
-
             'text' => 'required|max:255'
         ]);
-
 
         $updReply = new Comment();
 
@@ -194,13 +142,12 @@ class CommentController extends BaseContoller
             $data['msg'] = 'Successfull update';
             return $data;
 
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
 
             \Log::critical('Error updating comment '.$e->getMessage());
+            return redirect()->back()->with('delete_error','Application is not working, please come back later');
         }
 
     }
-
-
 
 }

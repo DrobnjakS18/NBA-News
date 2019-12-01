@@ -8,8 +8,9 @@
 
 namespace NbaNews\Model;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Post
+class Post extends Model
 {
     public $id;
     public $picture;
@@ -20,22 +21,10 @@ class Post
     public $catId;
 
 
-    public function getAll(){
+    public $timestamps = false;
 
-        return \DB::table('posts')->get();
-
-    }
 
     public function getAllByPost($id){
-
-        return \DB::table('posts as p')
-            ->select('*')
-            ->join('categories as c','p.cat_id','=','c.id_cat')
-            ->where('p.cat_id',$id)
-            ->get();
-    }
-
-    public function getAllByLatest($id){
 
         return \DB::table('posts as p')
             ->select('*')
@@ -50,7 +39,6 @@ class Post
             ->select('*')
             ->where('id',$id)
             ->first();
-
     }
 
     public function insertPost(){
@@ -129,12 +117,6 @@ class Post
 
         return $posts;
     }
-
-    public function PostsPagination(){
-
-        return \DB::table('posts')->paginate(4);
-    }
-
 
     public function VisitedPost($id_p,$id_u = null){
 

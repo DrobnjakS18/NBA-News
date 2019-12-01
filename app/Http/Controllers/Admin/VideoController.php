@@ -16,10 +16,7 @@ class VideoController extends BaseContoller
      */
     public function index()
     {
-        $video = new VideoModel();
-
-        $this->data['video'] = $video->getAllVideos();
-
+        $this->data['video'] = VideoModel::all();
 
         return view('admin.pages.video',$this->data);
     }

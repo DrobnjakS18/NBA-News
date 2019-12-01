@@ -18,7 +18,7 @@ class LoginController extends BaseContoller
 
         $username = $request->username;
         $pass = $request->pass;
-        $logObj = new User();
+        $logObj = new Users();
 
         $log = $logObj->log($username,$pass);
 
@@ -26,7 +26,7 @@ class LoginController extends BaseContoller
 
         if(session('user')){
 
-            $activities = new User();
+            $activities = new Users();
             $activities->user_id = session('user')->UserId;
             $activities->text = "Users ".session('user')->username." logged in";
 
@@ -42,7 +42,7 @@ class LoginController extends BaseContoller
 
     public function logout(){
 
-            $activities = new User();
+            $activities = new Users();
             $activities->user_id = session('user')->UserId;
             $activities->text = "Users ".session('user')->username." logout.";
 

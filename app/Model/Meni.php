@@ -8,12 +8,9 @@
 
 namespace NbaNews\Model;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Meni
+class Meni extends Model
 {
-
-    public function getAllMeni(){
-
-        return \DB::table('meni')->get();
-    }
+    protected $table = 'meni';
 }
