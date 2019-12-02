@@ -106,7 +106,6 @@
                                 </div>
                                     <div class="clearfix"> </div>
                             </div>
-
                         </div>
 
                         @if($com->id_u == session('user')->UserId)
@@ -128,7 +127,7 @@
                                                 <h4 class="modal-title">Update Comment</h4>
                                             </div>
                                             <form action=""></form>
-                                            <textarea name="update-field" id="">
+                                            <textarea name="update-field">
                                                 {{$com->com}}
                                             </textarea>
                                         </div>
@@ -213,13 +212,7 @@
         @endif
         <div class="clearfix"></div>
     </div>
-
     </div>
-
-
-
-
-
 
     <!--//banner-->
     <!--//banner-section-->
