@@ -13,26 +13,18 @@ class HomeController extends BaseContoller
     public function index()
     {
         $posts = new Post();
-        $mostViewed = $posts->PostsByVisit();
+        $this->data['most'] = $posts->PostsByVisit();
 
-        $latest= Post::where('cat_id',1)->get();
-        $post_game = Post::where('cat_id',2)->get();
-        $pagination = Post::paginate(4);
+        //DOHVATANJE VISE REDOVA
+        $this->data['latest']= Post::where('cat_id',1)->get();
+        $this->data['post_game'] = Post::where('cat_id',2)->get();
+        $this->data['pagination'] = Post::paginate(4);
 
-        $arrayVideos = VideoModel::all()->toArray();
-        $randomVideo = \Arr::random($arrayVideos);
-        $random_video = (object)$randomVideo;
+        $allVideos = VideoModel::all()->toArray();
+        $this->data['random_video'] = \Arr::random($allVideos);
 
-        return view("pages.home", [
-            'meni' => $this->data['meni'],
-            'most' => $mostViewed,
-            'latest' => $latest,
-            'post_game' => $post_game,
-            'pagination' => $pagination,
-            'random_video' => $random_video,
-        ]);
+        return view("pages.home", $this->data);
     }
-
 
     public function single($id, $userID = null)
     {

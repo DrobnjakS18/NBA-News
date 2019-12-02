@@ -88,7 +88,6 @@ class Post extends Model
 
         \DB::transaction(function (){
 
-
             \DB::table('comments')
                 ->where('id_p',$this->id)
                 ->delete();

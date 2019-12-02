@@ -83,10 +83,10 @@
                 <div class="general-text">
                     <div class="video-container">
 
-                        <iframe width="853" height="480" src="{{$random_video->url}}" frameborder="0" allowfullscreen=""></iframe>
+                        <iframe width="853" height="480" src="{{$random_video['url']}}" frameborder="0" allowfullscreen=""></iframe>
                 </div>
 
-                    <h5 class="highlight_title">{{$random_video->title}}</h5>
+                    <h5 class="highlight_title">{{$random_video['title']}}</h5>
                 </div>
 
                 <div class="edit-pics">
