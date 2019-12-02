@@ -107,7 +107,7 @@ class CommentController extends BaseContoller
             return redirect()->back();
         } catch (\Exception $e) {
             \Log::critical('CommentController inser failed error'.$e->getMessage());
-            return redirect()->back()->with('sub_comment_error','Application is not working, please come back later');
+            return redirect()->back()->with('show_error','Application is not working, please come back later');
         }
     }
 
@@ -122,7 +122,7 @@ class CommentController extends BaseContoller
         } catch (\Exception $e) {
 
             \Log::critical('Error deleting comment '.$e->getMessage());
-            return redirect()->back()->with('delete_error','Application is not working, please come back later');
+            return redirect()->back()->with('show_error','Application is not working, please come back later');
         }
     }
 

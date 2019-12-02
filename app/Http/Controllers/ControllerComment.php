@@ -69,7 +69,7 @@ class ControllerComment extends Controller
         } catch (\Exception $e) {
 
             \Log::info('CommentController inser failed error'.$e->getMessage());
-            return redirect()->back()->with('sub_comment_error','Application is not working, please come back later');
+            return redirect()->back()->with('show_error','Application is not working, please come back later');
         }
     }
 

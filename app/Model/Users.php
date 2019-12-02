@@ -24,6 +24,10 @@ class Users extends Model
     public $text;
     public $user_id;
 
+//    public function comments()
+//    {
+//        return $this->belongsToMany('NbaNews\Model\Comment');
+//    }
 
 
     public  function reg(){

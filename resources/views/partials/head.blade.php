@@ -1,5 +1,3 @@
-<!DOCTYPE HTML>
-<html>
 <head>
     @section('header')
         <title>NBA News | @yield('title')</title>

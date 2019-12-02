@@ -8,15 +8,22 @@
 
 namespace NbaNews\Model;
 
-
+use Illuminate\Database\Eloquent\Model;
 
 use mysql_xdevapi\Exception;
 
-class Comment
+class Comment extends Model
 {
     public $com;
     public $user_id;
     public $id;
+
+    protected $primaryKey = 'com_id';
+
+//    public function users()
+//    {
+//        return $this->belongsToMany('NbaNews\Model\Users','users',);
+//    }
 
     public function insertCom(){
 

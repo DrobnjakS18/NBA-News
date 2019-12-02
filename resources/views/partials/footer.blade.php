@@ -28,6 +28,7 @@
 <div class="copy">
     <p>&copy; 2019. All Rights Reserved | Stefan Drobnjak</p>
 </div>
+<a href="#home" id="toTop" class="scroll" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <div class="clearfix"> </div>
 </div>
 <div class="clearfix"> </div>

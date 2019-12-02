@@ -7,21 +7,21 @@ use NbaNews\Model\Post;
 use NbaNews\Model\Users;
 use NbaNews\Model\VideoModel;
 use Illuminate\Http\Request;
+use NbaNews\Model\Visit;
+use NbaNews\User;
+
 
 class HomeController extends BaseContoller
 {
+
     public function index()
     {
         $posts = new Post();
         $this->data['most'] = $posts->PostsByVisit();
 
-        //DOHVATANJE VISE REDOVA
         $this->data['latest']= Post::where('cat_id',1)->get();
-        $this->data['post_game'] = Post::where('cat_id',2)->get();
-        $this->data['pagination'] = Post::paginate(4);
 
-        $allVideos = VideoModel::all()->toArray();
-        $this->data['random_video'] = \Arr::random($allVideos);
+        $this->data['pagination'] = Post::paginate(4);
 
         return view("pages.home", $this->data);
     }
@@ -30,30 +30,22 @@ class HomeController extends BaseContoller
     {
         $visited = new Post();
 
-        try {
-            $visited->VisitedPost($id, $userID);
-        } catch (\Exception $e) {
-            \Log::critical('Visiting post counter failed error'.$e->getMessage());
-        }
-
-        $this->data['count_visits'] =$visited->visitedCounter($id);
-
+        $visited->VisitedPost($id, $userID);
         $this->data['most'] =$visited->PostsByVisit();
+
+        $this->data['count_visits'] = Visit::where('id_p',$id)->count();
+        $this->data['count_comments'] = Comment::where('id_p',$id)->count();
 
         $com = new Comment();
 
-        $this->data['count_comments'] = $com->CountCommentsForPost($id);
         $this->data['comments'] =$com->getAllByPost($id);
+
+//        $commentsPost = Comment::find(30)->users;
+//        dd($commentsPost);
 
         $this->data['reply'] = $com->getAllReplies();
 
-        $posts = new Post();
-        $this->data['post'] = $posts->getOne($id);
-
-        $arrayVideos = VideoModel::all()->toArray();
-        $random_video = \Arr::random($arrayVideos);
-        $this->data['random_video'] = (object)$random_video;
-        $this->data['post_game'] = $posts->getAllByPost(2);
+        $this->data['post'] = Post::where('id',$id)->first();
 
         return view('pages.single_post', $this->data);
     }
@@ -73,7 +65,7 @@ class HomeController extends BaseContoller
         $posts = new Post();
 
         try {
-            $search = $posts->LikePosts($request->search_value);
+            $search = Post::where('headline','like','%'.$request->search_value.'%')->get();
         } catch (\Exception $e) {
             \Log::critical('Search failed error'.$e->getMessage());
         }

@@ -23,6 +23,11 @@ class Post extends Model
 
     public $timestamps = false;
 
+    public function users()
+    {
+        return $this->hasMany('NbaNews\Model\Users');
+    }
+
 
     public function getAllByPost($id){
 
@@ -102,21 +107,6 @@ class Post extends Model
         });
     }
 
-
-
-
-
-    public function LikePosts($headline){
-
-        $posts = \DB::table('posts')
-            ->select('*')
-            ->where('headline','like','%'.$headline.'%')
-            ->simplePaginate(3);
-
-
-        return $posts;
-    }
-
     public function VisitedPost($id_p,$id_u = null){
 
         \DB::table('visitors_post')
@@ -124,13 +114,6 @@ class Post extends Model
                 'id_p' => $id_p,
                 'id_u' => $id_u
             ]);
-    }
-
-    public  function visitedCounter($id_p){
-
-        return \DB::table('visitors_post')
-            ->where('id_p',$id_p)
-            ->count();
     }
 
     public function PostsByVisit(){

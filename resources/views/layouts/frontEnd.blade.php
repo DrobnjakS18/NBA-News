@@ -1,7 +1,8 @@
-
+<!DOCTYPE HTML>
+<html>
 @include('partials.head')
+<body>
 @include('partials.nav')
-
 @include('partials.side_nav')
 
 @yield('search')
@@ -17,4 +18,10 @@
 {{--BACKEND--}}
 @yield('post_form')
 @include('partials.footer')
+
 @include('partials.script')
+@yield('scripts')
+
+
+</body>
+</html>
