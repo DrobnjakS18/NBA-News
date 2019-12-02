@@ -62,8 +62,6 @@ class HomeController extends BaseContoller
             'search_value' => 'required|max:140'
         ]);
 
-        $posts = new Post();
-
         try {
             $search = Post::where('headline','like','%'.$request->search_value.'%')->get();
         } catch (\Exception $e) {

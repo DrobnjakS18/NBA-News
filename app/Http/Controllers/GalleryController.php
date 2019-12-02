@@ -16,7 +16,15 @@ class GalleryController extends BaseContoller
     public function index()
     {
         $this->data['gallery'] = Gallery_model::all();
+
         return view('pages.gallery',$this->data);
+    }
+
+    public function admin_gallery()
+    {
+        $this->data['gallery'] = Gallery_model::all();
+
+        return view('admin.pages.gallery',$this->data);
     }
 
     /**
@@ -57,7 +65,6 @@ class GalleryController extends BaseContoller
             $file->move(public_path('images/gallery'),$fileName);
             $resize = new Resize_picture();
 
-            //
             $resize->malaSlika(public_path('images/gallery').'\\'.$fileName,public_path('images/small_images').'\\small_'.$fileName,100,70);
 
             $picture = 'images/gallery/'.$fileName;
@@ -75,11 +82,7 @@ class GalleryController extends BaseContoller
             \Log::info('Failed to insert gallery picture error: '.$e->getMessage());
             return redirect()->back()->with('insert_gallery_error','Application is not working, please come back later');
         }
-
-
-
     }
-
     /**
      * Display the specified resource.
      *
@@ -99,7 +102,11 @@ class GalleryController extends BaseContoller
      */
     public function edit($id)
     {
-        //
+        $pic = new Gallery_model();
+
+        $this->data['one_pic'] = $pic->getOnePic($id);
+
+        return view('admin.update.update_gallery',$this->data);
     }
 
     /**
@@ -111,7 +118,76 @@ class GalleryController extends BaseContoller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        $gallery = new Gallery_model();
+
+        if($request->picture == null){
+
+            $request->validate([
+
+                'title' => 'required|min:2',
+            ]);
+
+            $gallery->name = $request->title;
+
+            try{
+
+                $gallery->updateTitle($id);
+                return redirect('/admin_gallery')->with('update_gallery_success',"You successfully update picture ");
+
+            }catch(\Exception $e){
+
+                \Log::critical('Update user failed'.$e->getMessage());
+                return redirect('/admin_gallery')->with('update_gallery_error',"Application is not working, please come back later");
+            }
+
+        }else{
+
+            $request->validate([
+
+                'title' => 'required|min:2',
+                'picture' => 'file|mimes:jpg,jpeg,png|max:2000|required'
+            ]);
+
+
+            $gallery->name = $request->title;
+
+            $file = $request->file('picture');
+
+            $fileName = $file->getClientOriginalName();
+
+            $fileName = time().$fileName;
+
+            try{
+
+                $file->move(public_path('images/gallery'),$fileName);
+                $resize = new Resize_picture();
+
+                //
+                $resize->malaSlika(public_path('images/gallery').'\\'.$fileName,public_path('images/small_images').'\\small_'.$fileName,100,70);
+
+                $picture = 'images/gallery/'.$fileName;
+                $small_picture = 'images/small_images/small_'.$fileName;
+
+                $gallery->picture = $picture;
+                $gallery->picture_small = $small_picture;
+                $gallery->alt = $file->getClientOriginalName();
+
+                $gallery->updateAll($id);
+
+                return redirect('/admin_gallery')->with('update_gallery_success',"You successfully update picture ");
+            }catch (\Exception $e){
+
+                \Log::critical('Failed to insert gallery picture error: '.$e->getMessage());
+                return redirect('/admin_gallery')->with('update_gallery_error',"Application is not working, please come back later");
+            }
+
+
+        }
+
+
+
+
     }
 
     /**
@@ -122,6 +198,14 @@ class GalleryController extends BaseContoller
      */
     public function destroy($id)
     {
-        //
+        $delete_pic = new Gallery_model();
+
+        try{
+            $delete_pic->id = $id;
+            $delete_pic->deletePic();
+        }catch(\Exception $e){
+
+            \Log::critical('Delete user failed'.$e->getMessage());
+        }
     }
 }

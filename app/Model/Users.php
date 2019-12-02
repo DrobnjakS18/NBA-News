@@ -29,6 +29,11 @@ class Users extends Model
 //        return $this->belongsToMany('NbaNews\Model\Comment');
 //    }
 
+    public function roles()
+    {
+        return $this->belongsTo('NbaNews\Model\Role','role_id');
+    }
+
 
     public  function reg(){
         \DB::table('users')

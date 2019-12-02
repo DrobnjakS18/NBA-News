@@ -30,7 +30,7 @@ Route::put('/reply/{id}','CommentController@updateReply');
 
 //GALLERY
 //gallery/create - pristup formi za unos
-Route::resource('gallery','GalleryController');
+Route::resource('gallery','GalleryController')->only(['index']);
 
 //CONTACT
 Route::get('/contact', "ContactController@index");
@@ -58,8 +58,10 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::resource('users','Admin\UserController');
     Route::get("/users/{id}/delete",'Admin\UserController@destroy');
-    Route::resource('admin_gallery','Admin\GalleryController');
-    Route::get("/admin_gallery/{id}/delete",'Admin\GalleryController@destroy');
+
+    Route::resource('gallery','GalleryController')->except(['index']);
+    Route::get('admin_gallery','GalleryController@admin_gallery')->name('admin_gallery');
+
     Route::resource('admin_news','Admin\PostController');
     Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');
     Route::resource('admin_category','Admin\CategoryController');

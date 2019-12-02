@@ -8,7 +8,7 @@
         </a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" href="{{route('admin_gallery.index')}}">
+        <a class="nav-link" href="{{route('admin_gallery')}}">
             <i class="fas fa-images"></i>
             <span>Gallery</span></a>
     </li>

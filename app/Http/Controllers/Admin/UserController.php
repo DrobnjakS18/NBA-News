@@ -3,6 +3,7 @@
 namespace NbaNews\Http\Controllers\Admin;
 
 use NbaNews\Http\Controllers\BaseContoller;
+use NbaNews\Model\Role;
 use NbaNews\User;
 use Illuminate\Http\Request;
 use NbaNews\Model\Users;
@@ -17,11 +18,8 @@ class UserController extends BaseContoller
      */
     public function index()
     {
-        $users = new Users();
 
-        $this->data['users'] = $users->getAll();
-
-        $this->data['role'] = $users->roles();
+        $this->data['role'] = Role::all();
 
         return view('admin.pages.home',$this->data);
     }
@@ -44,9 +42,7 @@ class UserController extends BaseContoller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-
             'firstName' => 'required|regex:/^[A-ZČĆŠĐŽ][a-zčćšđž]{2,19}$/',
             'LastName' => 'required|regex:/^[A-ZČĆŠĐŽ][a-zčćšđž]{2,19}$/',
             'email' => 'required|email|unique:users,email',
@@ -54,7 +50,6 @@ class UserController extends BaseContoller
             'password' => 'required|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{4,}$/',
             'role' => 'required'
         ]);
-
 
         $reg = new Users();
         $reg->first = $request->firstName;

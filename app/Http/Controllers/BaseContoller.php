@@ -16,7 +16,8 @@ class BaseContoller extends Controller
 
         $this->data['posts'] = Post::all();
         $this->data['meni'] = Meni::all();
-        $this->data['role'] = Users::all();
+        $this->data['users'] = Users::all();
+//        dd($this->data['users'] );
         $allVideos = VideoModel::all()->toArray();
         $this->data['random_video'] = \Arr::random($allVideos);
         $this->data['post_game'] = Post::where('cat_id',2)->get();

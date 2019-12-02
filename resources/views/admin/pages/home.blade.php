@@ -35,12 +35,12 @@
                             </thead>
                             @foreach($users as $user)
                             <tbody>
-                                <td>{{$user->first_name}}</td>
-                                <td>{{$user->last_name}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->name}}</td>
-                                <td><a href="{{route('users.edit',['id' => $user->UserId])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
-                                <td><a href="" style="color: red;" onclick="deleteUser({{$user->UserId}})"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td>{{$user['first_name']}}</td>
+                                <td>{{$user['last_name']}}</td>
+                                <td>{{$user['email']}}</td>
+                                <td>{{$user['username']}}</td>
+                                <td><a href="{{route('users.edit',['id' => $user['id']])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
+                                <td><a href="" style="color: red;" onclick="deleteUser({{ $user['id']}})"> <i class="fas fa-trash-alt"></i></a></td>
                             </tbody>
                             @endforeach
 
@@ -102,7 +102,7 @@
                                 <select class="custom-select" name="role">
                                     <option value="0">Select</option>
                                     @foreach($role as $r)
-                                        <option value="{{$r->id_role}}">{{$r->name}}</option>
+                                        <option value="{{$r['id_role']}}">{{$r['name']}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -129,19 +129,19 @@
 
 
         function deleteUser(id) {
-           
+
             $.ajax({
                 type:"GET",
                 url:'/users/'+id+'/delete',
                 dataType:'json',
                 success:function(){
-                    
+
                 },
                 error:function () {
-                    
+
                 }
             });
-            
+
         }
 
 
