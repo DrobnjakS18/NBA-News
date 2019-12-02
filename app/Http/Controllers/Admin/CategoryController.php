@@ -5,6 +5,7 @@ namespace NbaNews\Http\Controllers\Admin;
 use NbaNews\Http\Controllers\BaseContoller;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
+use NbaNews\Model\Category;
 
 class CategoryController extends BaseContoller
 {
@@ -15,9 +16,8 @@ class CategoryController extends BaseContoller
      */
     public function index()
     {
-        $category = new \NbaNews\Model\Category();
 
-        $this->data['category'] = $category->AllCategory();
+        $this->data['category'] = Category::all();
 
         return view('admin.pages.categories',$this->data);
 

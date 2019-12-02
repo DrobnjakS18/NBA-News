@@ -57,17 +57,17 @@ Route::post('/profile/{id}/edit','ProfileController@editProfile')->name('edit_pr
 Route::group(['middleware' => ['admin']], function () {
 
     Route::resource('users','Admin\UserController');
-    Route::get("/users/{id}/delete",'Admin\Users@destroy');
-    Route::resource('admin_gallery','Admin\Gallery');
-    Route::get("/admin_gallery/{id}/delete",'Admin\Gallery@destroy');
-    Route::resource('admin_news','Admin\Post');
-    Route::get("/admin_news/{id}/delete",'Admin\Post@destroy');
-    Route::resource('admin_category','Admin\Category');
-    Route::get("/admin_category/{id}/delete",'Admin\Category@destroy');
-    Route::resource('admin_video','Admin\Video');
-    Route::get("/admin_video/{id}/delete",'Admin\Video@destroy');
-    Route::get('/activities','Admin\Activities@index');
-    Route::get('/activities/sort','Admin\Activities@sortByDate');
+    Route::get("/users/{id}/delete",'Admin\UserController@destroy');
+    Route::resource('admin_gallery','Admin\GalleryController');
+    Route::get("/admin_gallery/{id}/delete",'Admin\GalleryController@destroy');
+    Route::resource('admin_news','Admin\PostController');
+    Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');
+    Route::resource('admin_category','Admin\CategoryController');
+    Route::get("/admin_category/{id}/delete",'Admin\CategoryController@destroy');
+    Route::resource('admin_video','Admin\VideoController');
+    Route::get("/admin_video/{id}/delete",'Admin\VideoController@destroy');
+    Route::get('/activities','Admin\ActivityController@index');
+    Route::get('/activities/sort','Admin\ActivityController@sortByDate');
 
 
 

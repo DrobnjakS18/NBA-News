@@ -22,9 +22,8 @@ class PostController extends BaseContoller
         $posts = new Post();
 
         $this->data['news'] = $posts->getAll();
-        $cat = new Category();
 
-        $this->data['category'] = $cat->AllCategory();
+        $this->data['category'] = Category::all();
 
         return view('admin.pages.news',$this->data);
 
@@ -37,9 +36,7 @@ class PostController extends BaseContoller
      */
     public function create()
     {
-        $cat = new Category();
-
-        $this->data['category'] = $cat->AllCategory();
+        $this->data['category'] = Category::all();
         return view('admin.create_post',$this->data);
     }
 
@@ -58,7 +55,6 @@ class PostController extends BaseContoller
         $alt = $fileName;
         $fileName = time().$fileName;
 
-
         $picture = 'images/'.$fileName;
 
 
@@ -67,8 +63,6 @@ class PostController extends BaseContoller
         $text = $request->text;
 
         $cat = $request->catId;
-
-
 
         try{
             $file->move(public_path('images'),$fileName);
@@ -127,9 +121,8 @@ class PostController extends BaseContoller
 
         $this->data['one_post'] = $one_post->getOne($id);
 
-        $cat = new Category();
 
-        $this->data['category'] = $cat->AllCategory();
+        $this->data['category'] = Category::all();
 
         return view('admin.update.update_news',$this->data);
     }

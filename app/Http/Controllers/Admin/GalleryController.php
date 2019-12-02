@@ -3,7 +3,7 @@
 namespace NbaNews\Http\Controllers\Admin;
 
 use NbaNews\Http\Controllers\BaseContoller;
-use NbaNews\Model\Gallery_modul;
+use NbaNews\Model\Gallery_model;
 use NbaNews\Resize_picture;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
@@ -17,9 +17,7 @@ class GalleryController extends BaseContoller
      */
     public function index()
     {
-        $gallery = new Gallery_modul();
-
-        $this->data['gallery'] = $gallery->getAllGallery();
+        $this->data['gallery'] = Gallery_model::all();
 
         return view('admin.pages.gallery',$this->data);
     }
@@ -50,7 +48,7 @@ class GalleryController extends BaseContoller
         ]);
 
 
-        $gallery = new Gallery_modul();
+        $gallery = new Gallery_model();
 
         $gallery->name = $request->title;
 
@@ -105,7 +103,7 @@ class GalleryController extends BaseContoller
     public function edit($id)
     {
 
-        $pic = new Gallery_modul();
+        $pic = new Gallery_model();
 
         $this->data['one_pic'] = $pic->getOnePic($id);
 
@@ -122,7 +120,7 @@ class GalleryController extends BaseContoller
     public function update(Request $request, $id)
     {
 
-        $gallery = new Gallery_modul();
+        $gallery = new Gallery_model();
 
         if($request->picture == null){
 
@@ -201,7 +199,7 @@ class GalleryController extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_pic = new Gallery_modul();
+        $delete_pic = new Gallery_model();
 
 
         try{

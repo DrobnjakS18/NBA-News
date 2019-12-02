@@ -9,8 +9,12 @@
 namespace NbaNews\Model;
 
 
-class VideoModel
+use Illuminate\Database\Eloquent\Model;
+
+class VideoModel extends Model
 {
+    protected $table = 'video';
+
     public $id;
     public $title;
     public $url;

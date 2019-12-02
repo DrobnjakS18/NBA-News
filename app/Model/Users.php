@@ -8,8 +8,9 @@
 
 namespace NbaNews\Model;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Users
+class Users extends Model
 {
     public $id;
     public $first;
@@ -102,7 +103,6 @@ class Users
             ]);
 
     }
-
     public function updateUserNoPass($id){
 
         \DB::table('users')
@@ -155,12 +155,6 @@ class Users
             ->where('day',$date)
             ->get();
     }
-
-
- public function roles(){
-
-        return \DB::table('role')->get();
- }
 
 
     public function getAll(){

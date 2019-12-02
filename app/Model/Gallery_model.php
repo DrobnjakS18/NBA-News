@@ -8,19 +8,17 @@
 
 namespace NbaNews\Model;
 
+use Illuminate\Database\Eloquent\Model;
 
-class Gallery_modul
+class Gallery_model extends Model
 {
+    protected $table = 'gallery';
+
     public $id;
     public $name;
     public $picture;
     public $picture_small;
     public $alt;
-
-    public function getAllGallery(){
-
-        return \DB::table('gallery')->paginate(9);
-    }
 
     public function getOnePic($id){
 
