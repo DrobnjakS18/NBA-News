@@ -2,7 +2,7 @@
 @section('title')
     Contact
 @endsection
-@section('contact')
+@section('content')
     <div class="contact">
         <h3 class="tittle">Find Us <i class="glyphicon glyphicon-map-marker"></i></h3>
         <div class="contact-left">

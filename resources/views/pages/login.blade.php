@@ -2,7 +2,7 @@
 @section('title')
     Login
 @endsection
-@section('login')
+@section('content')
     @if (session('reg_success'))
         <div class="alert alert-success">
             {{ session('reg_success') }}
@@ -13,7 +13,6 @@
             {{ session('login_error') }}
         </div>
     @endif
-    <!-- login-page -->
     <div class="login">
         <div class="login-grids">
             <div class="col-md-6 log">
@@ -25,7 +24,7 @@
                     <input type="text" name="username" id="username">
                     <h5>Password:</h5>
                     <input type="password" name="pass" id="pass">
-{{--                    <input type="submit" name="login" id="login" value="Login">--}}
+                    <input type="submit" name="login" id="login" value="Login">
                 </form>
                 <div class="alert alert-danger" id="log_error"></div>
             </div>
@@ -37,7 +36,6 @@
             <div class="clearfix"></div>
         </div>
     </div>
-    <!-- //login-page -->
     <div class="clearfix"> </div>
 @endsection
 @section('scripts')

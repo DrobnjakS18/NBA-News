@@ -1,11 +1,7 @@
 @extends('admin.layout.backEnd')
-@section('users')
+@section('content')
     <div id="content-wrapper">
-
         <div class="container-fluid">
-
-
-            <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
@@ -65,8 +61,6 @@
                             </div>
                         @endif
                     </div>
-
-
                     <button name="insert_user" class="btn btn-warning" onclick="showForm()">Insert</button>
                     <div id="form_show" style="display: none;">
                         <form  action="{{route('users.store')}}" method="POST" onsubmit="return Config()">
@@ -108,73 +102,40 @@
                             </div>
                             <input type="submit" name="sub_user" class="btn btn-primary" value="Submit"/>
                         </form>
-
                     </div>
-
-
                 </div>
             </div>
-
         </div>
-        <!-- /.container-fluid -->
-
     </div>
-    <!-- /.content-wrapper -->
 @endsection
 
-@section('back_script')
-    @parent
-
+@section('scripts')
     <script type="text/javascript">
-
-
         function deleteUser(id) {
-
             $.ajax({
                 type:"GET",
                 url:'/users/'+id+'/delete',
                 dataType:'json',
                 success:function(){
-
                 },
                 error:function () {
-
                 }
             });
-
         }
 
-
-
-
+        /**
+         * @return {boolean}
+         */
         function Config() {
-
             var confirm_pass = $('#confirm_pass').val();
-
             var pass = $('#password').val();
 
             if (confirm_pass !== pass) {
-
                 alert("Passwords don't match");
                 return false;
             }else{
-
                 return true;
             }
-
-
-
         }
-
-
-        function showForm() {
-
-            $("#form_show").slideToggle('slow');
-
-        }
-
     </script>
-
-
-
     @endsection

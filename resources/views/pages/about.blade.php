@@ -2,8 +2,7 @@
 @section('title')
     About
 @endsection
-@section('about')
-
+@section('content')
     <div id="autor">
         <div id="autor_centar">
             <h3 class="tittle">About <i class="glyphicon glyphicon-user"></i></h3>

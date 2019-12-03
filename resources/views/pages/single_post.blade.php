@@ -3,8 +3,7 @@
 @section('title')
     {{$post['headline']}}
 @endsection
-
-@section('single_post')
+@section('content')
     <div class="banner-section">
         @if ($errors->any())
             <div class="alert alert-danger">

@@ -4,7 +4,7 @@
     Search
     @endsection
 
-@section('search')
+@section('content')
     <div class="card-group">
         @if(isset($search_found))
             <div class="card text-center">

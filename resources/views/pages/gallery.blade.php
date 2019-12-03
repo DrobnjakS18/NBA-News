@@ -5,12 +5,8 @@
 @section('header')
     @parent
     <!--Custom-Theme-files-->
-    <link href="css/style.css" rel='stylesheet' type='text/css' />
-    <link rel="stylesheet" href="css/lightbox.css" type="text/css" media="all" />
-    <script src="js/modernizr.custom.js"></script>
-    <script src="js/jquery.min.js"> </script>
 @endsection
-@section('gallery')
+@section('content')
     <!--grids-->
     <div class="gallery-section">
         <h3 class="tittle">In Game <i class="glyphicon glyphicon-camera"></i></h3>
@@ -35,3 +31,4 @@
     </div>
     <div class="clearfix"> </div>
 @endsection
+

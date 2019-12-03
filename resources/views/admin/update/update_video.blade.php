@@ -1,9 +1,7 @@
 @extends('admin.layout.backEnd')
 
-@section('video_update_form')
-
+@section('content')
     <div class="card-body">
-
         <form  action="{{route('admin_video.update',['id' => $one_video->id])}}" method="POST" enctype="multipart/form-data" >
             @method('PUT')
             @csrf

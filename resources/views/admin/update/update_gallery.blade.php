@@ -1,6 +1,6 @@
 @extends('admin.layout.backEnd')
 
-@section('gallery_update_form')
+@section('content')
     <div class="card-body">
         <form  action="{{route('gallery.update',['id' => $one_pic['id']])}}" method="POST" enctype="multipart/form-data">
             @csrf

@@ -1,13 +1,8 @@
 @extends('admin.layout.backEnd')
 
-@section('category')
-
+@section('content')
     <div id="content-wrapper">
-
         <div class="container-fluid">
-
-
-            <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
@@ -39,14 +34,12 @@
                                 <td><a href="" style="color: red;" onclick="deleteCat({{$cat->id_cat}})"> <i class="fas fa-trash-alt"></i></a></td>
                                 </tbody>
                             @endforeach
-
                         </table>
                         @if(session('insert_category_success'))
                             <div class="alert alert-success">
                                 {{session('insert_category_success')}}
                             </div>
                         @endif
-
                         @if(session('insert_category_error'))
                             <div class="alert alert-danger">
                                 {{session('insert_category_error')}}
@@ -63,7 +56,6 @@
                             </div>
                             <input type="submit" name="sub_user" class="btn btn-primary" value="Submit"/>
                         </form>
-
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -76,43 +68,22 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <!-- /.container-fluid -->
-
     </div>
     @endsection
 
-@section('back_script')
-    @parent
+@section('scripts')
     <script type="text/javascript">
-
         function deleteCat(id) {
-
-
             $.ajax({
                 type:"GET",
                 url:'/admin_category/'+id+'/delete',
                 dataType:'json',
                 success:function(){
-
                 },
                 error:function () {
-
                 }
             });
-
         }
-
-
-
-        function showForm() {
-
-
-            $("#form_show").slideToggle('slow');
-
-        }
-
     </script>
 @endsection

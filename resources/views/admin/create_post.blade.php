@@ -1,7 +1,6 @@
 @extends('layouts.frontEnd')
 
-@section('post_form')
-
+@section('content')
     <h3 class="tittle">Insert post </h3>
     <form action="{{route('posts.store')}}" method="post" enctype="multipart/form-data">
         @csrf

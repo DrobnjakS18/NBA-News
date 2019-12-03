@@ -2,7 +2,7 @@
 @section('title')
     Home
     @endsection
-@section('home')
+@section('content')
     <div class="banner-section">
         @if(session('login_success'))
             <div class="alert alert-success">

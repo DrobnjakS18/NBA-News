@@ -3,14 +3,7 @@
 @section('title')
     Profile
     @endsection
-@section('script')
-    @parent
-    @endsection
-
-@section('profile')
-    {{--{{dd($commmented_views)}}--}}
-
-
+@section('content')
 <div class="container">
     <div class="row profile">
         <div class="col-md-3">
@@ -36,14 +29,10 @@
                 <div class="profile-usermenu">
                     <ul class="nav">
                         <li class="active">
-                            <a href="#" class="viewed">
-                                <i class="glyphicon glyphicon-home"></i>
-                                Viewed Posts </a>
+                            <a href="#" class="viewed"><i class="glyphicon glyphicon-home"></i>Viewed Posts </a>
                         </li>
                         <li>
-                            <a href="#" class="prof_settings">
-                                <i class="glyphicon glyphicon-user"></i>
-                                Account Settings </a>
+                            <a href="#" class="prof_settings"><i class="glyphicon glyphicon-user"></i>Account Settings </a>
                         </li>
                     </ul>
                 </div>
@@ -81,7 +70,6 @@
                             <input type="file" id="edit_picture" name="edit_picture"\>
                             <input type="submit" id="btnEditPic" name="btnEditPic" value="Edit" class="btn btn-success btn-sm"/>
                         </form>
-
                 </div>
                 @if($commmented_views->count() == 0)
                 <div id="viewed_posts">
@@ -107,10 +95,8 @@
                             </div>
                                 @endforeach
                         </div>
-                                                    {{$commmented_views->links()}}
+                          {{$commmented_views->links()}}
                     </div>
-
-
                 @endif
                 <div id="profile_settings" style="display: none; margin-top: 20px">
                             <h3>Account Settings</h3>
@@ -157,9 +143,6 @@
 @section('script')
     @parent
     <script type="text/javascript">
-
-
-
         function editProfile(id){
 
             var first_name = $('#profile_first').val();
@@ -167,9 +150,7 @@
             var email = $('#profile_email').val();
             var username = $('#profile_username').val();
 
-
             $.ajax({
-
                 type:'POST',
                 url:"/profile/"+id+"/edit",
                 data:{
@@ -180,44 +161,29 @@
                 },
                 dataType:'json',
                 success:function (data) {
-
                     $('#profile_first').val(first_name);
                     $('#profile_last').val(last_name);
                     $('#profile_email').val(email);
                     $('#profile_username').val(username);
                     alert(data.msg);
-
                 },
                 error:function (xhr,Status,ErrMsg) {
-
                     let errors = JSON.parse(xhr.responseText).errors;
-
                     let status = xhr.status;
 
                     if(status == 422){
-
                         var ispis = "<ul>";
                       for(var i in errors){
-
                         ispis += '<li>'+errors[i]+'</li>';
                       }
                       ispis +='</ul>';
-
                       $('#ajax_ispis').html(ispis);
-
                     }else{
-
                         alert('Application is not working, please come back later');
-
                     }
-
                 }
             });
         }
-
-
-
-
 
         $('li > a').click(function() {
             $('li').removeClass();
@@ -225,31 +191,21 @@
         });
 
         $('#btn_edit_pic').click(function(){
-
             $('#edit_pic').show();
             $('#viewed_posts').hide();
             $('#profile_settings').hide();
-
         });
 
         $('.viewed').click(function () {
-
             $('#edit_pic').hide();
             $('#viewed_posts').show();
             $('#profile_settings').hide();
         });
 
         $('.prof_settings').click(function () {
-
             $('#edit_pic').hide();
             $('#viewed_posts').hide();
             $('#profile_settings').show();
         });
-
-
-
-
-
-
     </script>
     @endsection

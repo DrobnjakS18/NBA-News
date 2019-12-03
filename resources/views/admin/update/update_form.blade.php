@@ -1,9 +1,7 @@
 @extends('admin.layout.backEnd')
 
-@section('update_form')
-
+@section('content')
     <div class="card-body">
-
     <form  action="{{route('users.update',['id' => $one_user->UserId])}}" method="POST" enctype="multipart/form-data" >
         @method('PUT')
         @csrf
@@ -78,8 +76,6 @@
 
                 {{--return true;--}}
             {{--}--}}
-
-
 
         {{--}--}}
     {{--</script>--}}

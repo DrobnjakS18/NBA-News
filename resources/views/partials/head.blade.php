@@ -10,18 +10,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <link href='//fonts.googleapis.com/css?family=Open+Sans:700,700italic,800,300,300italic,400italic,400,600,600italic' rel='stylesheet' type='text/css'>
         <!--Custom-Theme-files-->
         <link href="{{asset('css/style.css')}}" rel='stylesheet' type='text/css' />
-        <script src="{{asset('js/jquery.min.js')}}"> </script>
-        <!--/script-->
-        <script type="text/javascript" src="{{asset('js/move-top.js')}}"></script>
-        <script type="text/javascript" src="{{asset('js/easing.js')}}"></script>
-        <script type="text/javascript">
+        <link rel="stylesheet" href="{{asset('css/lightbox.css')}}" type="text/css" media="all" />
 
-            jQuery(document).ready(function($) {
-                $(".scroll").click(function(event){
-                    event.preventDefault();
-                    $('html,body').animate({scrollTop:$(this.hash).offset().top},900);
-                });
-            });
-        </script>
     @show
 </head>

@@ -1,13 +1,8 @@
 @extends('admin.layout.backEnd')
 
-@section('video')
-
+@section('content')
     <div id="content-wrapper">
-
         <div class="container-fluid">
-
-
-            <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
@@ -41,23 +36,18 @@
                                 <td><a href="" style="color: red;" onclick="deleteVideo({{$clip->id}})"> <i class="fas fa-trash-alt"></i></a></td>
                                 </tbody>
                             @endforeach
-
                         </table>
-
-
                         @if(session('insert_video_success'))
                             <div class="alert alert-success">
                                 {{session('insert_video_success')}}
                             </div>
                         @endif
-
                         @if(session('insert_video_error'))
                             <div class="alert alert-danger">
                                 {{session('insert_video_error')}}
                             </div>
                         @endif
                     </div>
-
                     <button name="insert_gallery" class="btn btn-warning" onclick="showForm()">Insert</button>
                     <div id="form_show" style="display: none;">
                         <form  action="{{route('admin_video.store')}}" method="POST">
@@ -72,7 +62,6 @@
                             </div>
                             <input type="submit" name="sub_user" class="btn btn-primary" value="Submit"/>
                         </form>
-
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -85,43 +74,21 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <!-- /.container-fluid -->
-
     </div>
     @endsection
-
-@section('back_script')
-    @parent
+@section('scripts')
     <script type="text/javascript">
-
         function deleteVideo(id) {
-
-
             $.ajax({
                 type:"GET",
                 url:'/admin_video/'+id+'/delete',
                 dataType:'json',
                 success:function(){
-
                 },
                 error:function () {
-
                 }
             });
-
         }
-
-
-
-        function showForm() {
-
-
-            $("#form_show").slideToggle('slow');
-
-        }
-
     </script>
 @endsection

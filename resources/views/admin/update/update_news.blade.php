@@ -1,9 +1,7 @@
 @extends('admin.layout.backEnd')
 
-@section('news_update_form')
-
+@section('content')
     <div class="card-body">
-
         <form  action="{{route('admin_news.update',['id' => $one_post->id])}}" method="POST" enctype="multipart/form-data" >
             @method('PUT')
             @csrf

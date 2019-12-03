@@ -1,9 +1,8 @@
 @extends('admin.layout.backEnd')
 
-@section('gallery')
+@section('content')
     <div id="content-wrapper">
         <div class="container-fluid">
-            <!-- DataTables Example -->
             <div class="card mb-3">
                 <div class="card-header">
                     <i class="fas fa-table"></i>
@@ -52,7 +51,6 @@
                             </div>
                         @endif
                     </div>
-
                     <button name="insert_gallery" class="btn btn-warning" onclick="showForm()">Insert</button>
                     <div id="form_show" style="display: none;">
                         <form  action="{{route('gallery.store')}}" method="POST" enctype="multipart/form-data">
@@ -84,8 +82,7 @@
     </div>
     @endsection
 
-@section('back_script')
-    @parent
+@section('scripts')
     <script type="text/javascript">
         function deleteGallery(id) {
             $.ajax({
@@ -102,10 +99,6 @@
                 error:function () {
                 }
             });
-        }
-
-        function showForm() {
-            $("#form_show").slideToggle('slow');
         }
     </script>
     @endsection
