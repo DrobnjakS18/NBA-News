@@ -20,7 +20,7 @@
         {{session('insert_gallery_error')}}
     </div>
 @endif
-<form action="{{route('gallery.store')}}" method="POST" enctype="multipart/form-data">
+<form action="{{route('gallery.update')}}" method="POST" enctype="multipart/form-data">
    @csrf
     Naziv
     <input type="text" name="title"/>

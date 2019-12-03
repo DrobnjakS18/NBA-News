@@ -59,8 +59,9 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('users','Admin\UserController');
     Route::get("/users/{id}/delete",'Admin\UserController@destroy');
 
+    Route::get('gallery/admin_gallery','GalleryController@admin_gallery')->name('admin_gallery');
     Route::resource('gallery','GalleryController')->except(['index']);
-    Route::get('admin_gallery','GalleryController@admin_gallery')->name('admin_gallery');
+
 
     Route::resource('admin_news','Admin\PostController');
     Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');
@@ -70,9 +71,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get("/admin_video/{id}/delete",'Admin\VideoController@destroy');
     Route::get('/activities','Admin\ActivityController@index');
     Route::get('/activities/sort','Admin\ActivityController@sortByDate');
-
-
-
 });
 
 

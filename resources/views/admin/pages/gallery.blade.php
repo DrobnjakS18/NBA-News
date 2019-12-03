@@ -31,10 +31,10 @@
                             </thead>
                             @foreach($gallery as $pic)
                                 <tbody>
-                                <td>{{$pic->title}}</td>
-                                <td><img src="{{asset($pic->small_path)}}" alt="{{$pic->alt}}"/></td>
-                                <td><a href="{{route('gallery.edit',['id' => $pic->id ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
-                                <td><a href="" style="color: red;" onclick="deleteGallery({{$pic->id}})"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td>{{$pic['title']}}</td>
+                                <td><img src="{{asset($pic['small_path'])}}" alt="{{$pic['alt']}}"/></td>
+                                <td><a href="{{route('gallery.edit',['id' => $pic['id'] ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
+                                <td><a href="" style="color: red;" onclick="deleteGallery({{$pic['id']}})"> <i class="fas fa-trash-alt"></i></a></td>
                                 </tbody>
                             @endforeach
 
@@ -52,7 +52,6 @@
                             </div>
                         @endif
                     </div>
-{{--                    {{$gallery->links()}}--}}
 
                     <button name="insert_gallery" class="btn btn-warning" onclick="showForm()">Insert</button>
                     <div id="form_show" style="display: none;">
@@ -81,13 +80,8 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-        <!-- /.container-fluid -->
-
     </div>
-    <!-- /.content-wrapper -->
     @endsection
 
 @section('back_script')
