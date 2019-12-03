@@ -48,40 +48,35 @@ class GalleryController extends BaseContoller
         $request->validate([
 
             'title' => 'required|min:2',
-            'gallery_pic' => 'file|mimes:jpg,jpeg,png|max:2000|required'
+            'picture' => 'file|mimes:jpg,jpeg,png|max:2000|required'
         ]);
 
-        $gallery = new Gallery_model();
+        $gallery = new Gallery_model;
 
-        $gallery->name = $request->title;
-
-        $file = $request->file('gallery_pic');
-
+        $gallery->title = $request->title;
+        $file = $request->file('picture');
         $fileName = $file->getClientOriginalName();
         $fileName = time().$fileName;
 
-        try{
+            try{
+                $file->move(public_path('images/gallery'),$fileName);
+                $resize = new Resize_picture();
 
-            $file->move(public_path('images/gallery'),$fileName);
-            $resize = new Resize_picture();
+                $resize->malaSlika(public_path('images/gallery').'/'.$fileName,public_path('images/small_images').'/small_'.$fileName,100,70);
 
-            $resize->malaSlika(public_path('images/gallery').'\\'.$fileName,public_path('images/small_images').'\\small_'.$fileName,100,70);
+                $picture = 'images/gallery/'.$fileName;
+                $smallPicture = 'images/small_images/small_'.$fileName;
 
-            $picture = 'images/gallery/'.$fileName;
-            $smallPicture = 'images/small_images/small_'.$fileName;
+                $gallery->picture_path = $picture;
+                $gallery->alt = $file->getClientOriginalName();
+                $gallery->small_path = $smallPicture;
 
-            $gallery->picture = $picture;
-            $gallery->picture_small = $smallPicture;
-            $gallery->alt = $file->getClientOriginalName();
-
-            $gallery->insertGalleryPic();
-
-            return redirect()->back()->with('insert_gallery_success','You successfully inserted a picture');
-        }catch (\Exception $e){
-
-            \Log::info('Failed to insert gallery picture error: '.$e->getMessage());
-            return redirect()->back()->with('insert_gallery_error','Application is not working, please come back later');
-        }
+                $gallery->save();
+                    return redirect()->back()->with('insert_gallery_success','You successfully inserted a picture');
+                }catch (\Exception $e){
+                    \Log::info('Failed to insert gallery picture error: '.$e->getMessage());
+                    return redirect()->back()->with('insert_gallery_error','Application is not working, please come back later');
+                }
     }
     /**
      * Display the specified resource.
@@ -102,9 +97,8 @@ class GalleryController extends BaseContoller
      */
     public function edit($id)
     {
-        $pic = new Gallery_model();
 
-        $this->data['one_pic'] = $pic->getOnePic($id);
+        $this->data['one_pic'] = Gallery_model::find($id);
 
         return view('admin.update.update_gallery',$this->data);
     }
@@ -118,76 +112,56 @@ class GalleryController extends BaseContoller
      */
     public function update(Request $request, $id)
     {
-
-        $gallery = new Gallery_model();
+        $gallery = Gallery_model::find($id);
 
         if($request->picture == null){
-
             $request->validate([
-
                 'title' => 'required|min:2',
             ]);
+                try {
+                    $gallery->title = $request->title;
+                    $gallery->save();
+                    return redirect('/gallery/admin_gallery')->with('update_gallery_success',"You successfully update picture ");
 
-            $gallery->name = $request->title;
+                } catch (\Exception $e) {
+                    \Log::critical('Update user failed'.$e->getMessage());
+                    return redirect('/gallery/admin_gallery')->with('update_gallery_error',"Application is not working, please come back later");
+                }
 
-            try{
-
-                $gallery->updateTitle($id);
-                return redirect('/admin_gallery')->with('update_gallery_success',"You successfully update picture ");
-
-            }catch(\Exception $e){
-
-                \Log::critical('Update user failed'.$e->getMessage());
-                return redirect('/admin_gallery')->with('update_gallery_error',"Application is not working, please come back later");
-            }
-
-        }else{
-
+        } else {
             $request->validate([
-
                 'title' => 'required|min:2',
                 'picture' => 'file|mimes:jpg,jpeg,png|max:2000|required'
             ]);
 
-
-            $gallery->name = $request->title;
+            $gallery->title = $request->title;
 
             $file = $request->file('picture');
 
             $fileName = $file->getClientOriginalName();
 
             $fileName = time().$fileName;
-
             try{
-
                 $file->move(public_path('images/gallery'),$fileName);
+
                 $resize = new Resize_picture();
-
-                //
-                $resize->malaSlika(public_path('images/gallery').'\\'.$fileName,public_path('images/small_images').'\\small_'.$fileName,100,70);
-
+                $resize->malaSlika(public_path('images/gallery').'/'.$fileName,public_path('images/small_images').'/small_'.$fileName,100,70);
                 $picture = 'images/gallery/'.$fileName;
                 $small_picture = 'images/small_images/small_'.$fileName;
 
-                $gallery->picture = $picture;
-                $gallery->picture_small = $small_picture;
+                $gallery->picture_path = $picture;
+                $gallery->small_path = $small_picture;
                 $gallery->alt = $file->getClientOriginalName();
 
-                $gallery->updateAll($id);
+                $gallery->save();
 
-                return redirect('/admin_gallery')->with('update_gallery_success',"You successfully update picture ");
-            }catch (\Exception $e){
-
+                return redirect('/gallery/admin_gallery')->with('update_gallery_success',"You successfully update picture ");
+            }catch (\Exception $e) {
                 \Log::critical('Failed to insert gallery picture error: '.$e->getMessage());
-                return redirect('/admin_gallery')->with('update_gallery_error',"Application is not working, please come back later");
+                echo $e->getMessage();
+                    return redirect('/gallery/admin_gallery')->with('update_gallery_error',"Application is not working, please come back later");
             }
-
-
         }
-
-
-
-
     }
 
     /**
@@ -198,13 +172,9 @@ class GalleryController extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_pic = new Gallery_model();
-
         try{
-            $delete_pic->id = $id;
-            $delete_pic->deletePic();
+           Gallery_model::destroy($id);
         }catch(\Exception $e){
-
             \Log::critical('Delete user failed'.$e->getMessage());
         }
     }

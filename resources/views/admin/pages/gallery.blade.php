@@ -89,9 +89,14 @@
     <script type="text/javascript">
         function deleteGallery(id) {
             $.ajax({
-                type:"GET",
-                url:'/admin_gallery/'+id+'/delete',
+                type:"DELETE",
+                url:'gallery/'+id,
                 dataType:'json',
+                data: {
+                    // "id": id,
+                    // "_method": 'DELETE',
+                    // "_token": token,
+                },
                 success:function(){
                 },
                 error:function () {
