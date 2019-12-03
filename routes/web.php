@@ -18,18 +18,17 @@ Route::get('/about', "HomeController@about");
 Route::get('/search','HomeController@search');
 
 
-Route::resource('comments','ControllerComment');
+Route::resource('comments','CommentController');
 //COMMENTS
-//Route::post('/post/{id}/comment','CommentController@store')->name('sub_comment');
-//Route::get('/comment/{id}','CommentController@destroy')->name('del_comment');
-Route::put('/comment/{id}','CommentController@update')->name('update_comment');
-Route::post('/comment/{id}/reply','CommentController@reply')->name('reply_comment');
-Route::get('/reply/{id}','CommentController@deleteReply')->name('reply_del');
-Route::put('/reply/{id}','CommentController@updateReply');
+//Route::post('/post/{id}/comment','CommentCon@store')->name('sub_comment');
+//Route::get('/comment/{id}','CommentCon@destroy')->name('del_comment');
+Route::put('/comment/{id}','CommentCon@update')->name('update_comment');
+Route::post('/comment/{id}/reply','CommentCon@reply')->name('reply_comment');
+Route::get('/reply/{id}','CommentCon@deleteReply')->name('reply_del');
+Route::put('/reply/{id}','CommentCon@updateReply');
 
 
 //GALLERY
-//gallery/create - pristup formi za unos
 Route::resource('gallery','GalleryController')->only(['index']);
 
 //CONTACT
@@ -61,7 +60,6 @@ Route::group(['middleware' => ['admin']], function () {
 
     Route::get('gallery/admin_gallery','GalleryController@admin_gallery')->name('admin_gallery');
     Route::resource('gallery','GalleryController')->except(['index']);
-
 
     Route::resource('admin_news','Admin\PostController');
     Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');

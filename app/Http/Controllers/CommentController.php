@@ -1,153 +1,143 @@
 <?php
-/**
- * Created by PhpStorm.
- * Users: DrobnjakS
- * Date: 3/6/2019
- * Time: 7:53 PM
- */
 
 namespace NbaNews\Http\Controllers;
+
+use Illuminate\Http\Request;
 use NbaNews\Model\Comment;
 use NbaNews\Model\Users;
-use Illuminate\Http\Request;
 
-class CommentController extends BaseContoller
+
+class CommentController extends Controller
 {
-
-//
-//    public function destroy($id)
-//    {
-//
-//        $delete = new Comment();
-//
-//        $delete->id = $id;
-//
-//            $activities = new Users();
-//            $activities->user_id = session('user')->UserId;
-//            $activities->text = "Users ".session('user')->username." deleted his comment ";
-//
-//            try{
-//                $activities->insertActivities();
-//            } catch (\Exception $e) {
-//
-//                \Log::critical('Reply activities failed error'.$e->getMessage());
-//            }
-//
-//
-//
-//
-//        try{
-//            $delete->deleteComment();
-//
-//            return redirect()->back();
-//        } catch (\Exception $e) {
-//
-//            \Log::info('Error deleting comment '.$e->getMessage());
-//            return redirect()->back()->with('delete_error','Application is not working, please come back later');
-//        }
-//    }
-
-    public function update(Request $request,$id)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
     {
-
-        $request->validate([
-            'text' => 'required|max:255'
-        ]);
-
-        $update = new Comment();
-
-        $update->com = $request->text;
-
-        try{
-
-            $update->updateComment($id);
-
-            $data['msg'] = 'Successfull update';
-            return $data;
-
-        } catch (\Exception $e) {
-            \Log::critical('Error updating comment '.$e->getMessage());
-
-        }
-
-
+        //
     }
 
-
-    public function reply(Request $request,$id)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
+        //
+    }
 
-       $request->validate([
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        $request->validate([
+            'comment_area' => 'required|max:255'
+        ]);
+        $comVal = $request->comment_area;
+        $userID = $request->user_id;
 
-           'text_rep' => 'required|max:255'
-       ]);
+        $com = new Comment();
 
-        $replay = new Comment();
-
-        $replay->com = $request->text_rep;
-        $replay->user_id = $request->user_id;
-
+        $com->id = $request->post_id;
+        $com->com = $comVal;
+        $com->user_id = $userID;
 
         if(session('user')){
             $activities = new Users();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "Users ".session('user')->username." reply ".$request->text_rep;
+            $activities->text = "Users ".session('user')->username." commented ".$comVal;
+
             try{
                 $activities->insertActivities();
-            } catch (\Exception $e) {
+            }
+            catch(\Exception $e){
 
-                \Log::critical('Reply activities failed error'.$e->getMessage());
+                \Log::critical('CommentCon activities failed error'.$e->getMessage());
             }
         }
 
-
-
         try{
-            $replay->subReplayComment($id);
-            return redirect()->back();
+            $com->insertCom();
+            return redirect()->back()->with('sub_comment_success','Thanks for commenting');
         } catch (\Exception $e) {
-            \Log::critical('CommentController inser failed error'.$e->getMessage());
+
+            \Log::info('CommentCon inser failed error'.$e->getMessage());
             return redirect()->back()->with('show_error','Application is not working, please come back later');
         }
     }
 
-    public function deleteReply($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
-        $del = new Comment();
+        dd($id);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $delete = new Comment();
+
+        $delete->id = $id;
+
+        $activities = new Users();
+        $activities->user_id = session('user')->UserId;
+        $activities->text = "Users ".session('user')->username." deleted his comment ";
 
         try{
-            $del->delReply($id);
+            $activities->insertActivities();
+        } catch (\Exception $e) {
+
+            \Log::critical('Reply activities failed error'.$e->getMessage());
+        }
+
+        try{
+            $delete->deleteComment();
 
             return redirect()->back();
         } catch (\Exception $e) {
 
-            \Log::critical('Error deleting comment '.$e->getMessage());
-            return redirect()->back()->with('show_error','Application is not working, please come back later');
-        }
-    }
-
-    public function updateReply(Request $request,$id)
-    {
-        $request->validate([
-            'text' => 'required|max:255'
-        ]);
-
-        $updReply = new Comment();
-
-        $updReply->com = $request->text;
-
-        try{
-
-            $updReply->updateReply($id);
-            $data['msg'] = 'Successfull update';
-            return $data;
-
-        } catch (\Exception $e) {
-
-            \Log::critical('Error updating comment '.$e->getMessage());
+            \Log::info('Error deleting comment '.$e->getMessage());
             return redirect()->back()->with('delete_error','Application is not working, please come back later');
         }
-
     }
-
 }

@@ -68,8 +68,8 @@ class GalleryController extends BaseContoller
                 $smallPicture = 'images/small_images/small_'.$fileName;
 
                 $gallery->picture_path = $picture;
-                $gallery->alt = $file->getClientOriginalName();
                 $gallery->small_path = $smallPicture;
+                $gallery->alt = $file->getClientOriginalName();
 
                 $gallery->save();
                     return redirect()->back()->with('insert_gallery_success','You successfully inserted a picture');
@@ -97,9 +97,7 @@ class GalleryController extends BaseContoller
      */
     public function edit($id)
     {
-
         $this->data['one_pic'] = Gallery_model::find($id);
-
         return view('admin.update.update_gallery',$this->data);
     }
 
@@ -143,7 +141,6 @@ class GalleryController extends BaseContoller
             $fileName = time().$fileName;
             try{
                 $file->move(public_path('images/gallery'),$fileName);
-
                 $resize = new Resize_picture();
                 $resize->malaSlika(public_path('images/gallery').'/'.$fileName,public_path('images/small_images').'/small_'.$fileName,100,70);
                 $picture = 'images/gallery/'.$fileName;
