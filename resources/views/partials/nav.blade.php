@@ -3,7 +3,7 @@
         <ul class="cl-effect-16 top-nag">
             @if(!session('user'))
             <li><a href="{{asset('/registration')}}" data-hover="Registration">Registration</a></li>
-            <li><a href="{{asset('/login')}}" data-hover="Login">Login</a></li>
+            <li><a href="{{route('login.create')}}" data-hover="Login">Login</a></li>
             @else
                 <li><a href="{{asset('/logout')}}" data-hover="Logout">Logout</a></li>
                 <li><a href="{{route('profile',['username'=>session('user')->username])}}" data-hover="Profile">Profile</a></li>

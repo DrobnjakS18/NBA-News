@@ -47,7 +47,7 @@
                     <a>
                         <img class="media-object" src="{{asset($com->profile_pic)}}" alt="{{$com->alt}}" width="80px"/>
                     </a>
-                    <h5><a>  {{$com->username}}</a></h5>
+                    <h5><a>{{$com->username}}</a></h5>
                 </div>
                 <div class="media-body response-text-right ">
                     <div id="comment_ajax_{{$com->com_id}}">
@@ -83,15 +83,18 @@
                                 <div id="myModal" class="modal fade" role="dialog">
                                     <div class="modal-dialog">
                                         <!-- Modal content-->
-                                        <div class="modal-content">
+                                        <div class="modal-content text-center">
                                             <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                 <h4 class="modal-title">Update Comment</h4>
                                             </div>
-                                            <form action=""></form>
-                                            <textarea name="update-field">
-                                                {{$com->com}}
-                                            </textarea>
+{{--                                            <form>--}}
+{{--                                                <textarea name="update-field" rows="4" cols="67">--}}
+{{--                                                {{$com->com}}--}}
+{{--                                                </textarea>--}}
+{{--                                                <input type="submit" class="btn btn-warning" value="Update" onclick="">--}}
+{{--                                            </form>--}}
+
                                         </div>
                                     </div>
                                 </div>
@@ -153,7 +156,7 @@
             <form action="{{route('comments.store')}}" method="POST">
                 <textarea name="comment_area" id="comment_area" placeholder="Your comment..."></textarea>
                 <input type="hidden" name="user_id" id="user_id" value="{{session('user')->UserId}}"/>
-                <input type="hidden" name="post_id" id="post_id" value="{{$post->id}}"/>
+                <input type="hidden" name="post_id" id="post_id" value="{{$post['id']}}"/>
                 <input type="submit" id="sub_com" value="submit comment"/>
             </form>
         </div>
@@ -237,7 +240,6 @@
         });
 
         function update_com(id) {
-
             $('#comment_ajax_'+id).hide();
             var text = $('#update_comment_modal').val();
             var ispis = '<p>'+text+'</p>';

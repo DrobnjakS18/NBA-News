@@ -14,9 +14,9 @@ use mysql_xdevapi\Exception;
 
 class Comment extends Model
 {
-    public $com;
-    public $user_id;
-    public $id;
+//    public $com;
+//    public $user_id;
+//    public $id;
 
     protected $primaryKey = 'com_id';
 
@@ -25,15 +25,15 @@ class Comment extends Model
 //        return $this->belongsToMany('NbaNews\Model\Users','users',);
 //    }
 
-    public function insertCom(){
-
-        \DB::table('comments')
-            ->insert([
-                'com' => $this->com,
-                'id_p' => $this->id,
-                'id_u' => $this->user_id
-            ]);
-    }
+//    public function insertCom(){
+//
+//        \DB::table('comments')
+//            ->insert([
+//                'com' => $this->com,
+//                'id_p' => $this->id,
+//                'id_u' => $this->user_id
+//            ]);
+//    }
 
     public function getAllByPost($id){
 

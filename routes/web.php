@@ -17,16 +17,12 @@ Route::get('/post/{id}/{userID?}',"HomeController@single")->name('single_post');
 Route::get('/about', "HomeController@about");
 Route::get('/search','HomeController@search');
 
-
 Route::resource('comments','CommentController');
+
 //COMMENTS
-//Route::post('/post/{id}/comment','CommentCon@store')->name('sub_comment');
-//Route::get('/comment/{id}','CommentCon@destroy')->name('del_comment');
-Route::put('/comment/{id}','CommentCon@update')->name('update_comment');
 Route::post('/comment/{id}/reply','CommentCon@reply')->name('reply_comment');
 Route::get('/reply/{id}','CommentCon@deleteReply')->name('reply_del');
 Route::put('/reply/{id}','CommentCon@updateReply');
-
 
 //GALLERY
 Route::resource('gallery','GalleryController')->only(['index']);
@@ -40,9 +36,9 @@ Route::get('/registration', "RegistrationController@index");
 Route::post('/registration',"RegistrationController@store");
 
 //LOGIN
-Route::get('/login', "LoginController@create");
-Route::post('/login','LoginController@log');
-Route::get('/logout','LoginController@logout');
+Route::get('/login', "LoginController@create")->name('login.create');
+Route::post('/login','LoginController@store')->name('login.store');
+Route::get('/logout','LoginController@destroy')->name('login.destroy');
 
 //PROFILE
 Route::get('/profile/{username}','ProfileController@index')->name('profile')->middleware('profile')->where('username','[A-Za-z0-9][A-Za-z0-9: _-]{1,19}');

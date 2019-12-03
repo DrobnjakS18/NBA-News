@@ -14,8 +14,8 @@ class LoginController extends BaseContoller
         return view('pages.login',$this->data);
     }
 
-    public function log(Request $request){
-
+    public function store(Request $request)
+    {
         $username = $request->username;
         $pass = $request->pass;
         $logObj = new Users();
@@ -40,7 +40,7 @@ class LoginController extends BaseContoller
 
     }
 
-    public function logout(){
+    public function destroy(){
 
             $activities = new Users();
             $activities->user_id = session('user')->UserId;

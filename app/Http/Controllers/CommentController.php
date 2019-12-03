@@ -7,7 +7,7 @@ use NbaNews\Model\Comment;
 use NbaNews\Model\Users;
 
 
-class CommentController extends Controller
+class   CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -40,35 +40,27 @@ class CommentController extends Controller
         $request->validate([
             'comment_area' => 'required|max:255'
         ]);
-        $comVal = $request->comment_area;
-        $userID = $request->user_id;
 
-        $com = new Comment();
+        $comment = new Comment;
 
-        $com->id = $request->post_id;
-        $com->com = $comVal;
-        $com->user_id = $userID;
+        $comment->com = $request->comment_area;
+        $comment->id_p = $request->post_id;
+        $comment->id_u = $request->user_id;
 
-        if(session('user')){
+        if (session('user')) {
             $activities = new Users();
             $activities->user_id = session('user')->UserId;
-            $activities->text = "Users ".session('user')->username." commented ".$comVal;
+            $activities->text = "User".session('user')->username." commented ".$request->comment_area;
 
             try{
-                $activities->insertActivities();
+                $comment->save();
+                return redirect()->back()->with('sub_comment_success','Thanks for commenting');
             }
             catch(\Exception $e){
-
-                \Log::critical('CommentCon activities failed error'.$e->getMessage());
+                \Log::info('CommentCon insert failed error'.$e->getMessage());
+                return redirect()->back()->with('show_error','Application is not working, please come back later');
             }
-        }
-
-        try{
-            $com->insertCom();
-            return redirect()->back()->with('sub_comment_success','Thanks for commenting');
-        } catch (\Exception $e) {
-
-            \Log::info('CommentCon inser failed error'.$e->getMessage());
+        } else {
             return redirect()->back()->with('show_error','Application is not working, please come back later');
         }
     }
@@ -104,7 +96,7 @@ class CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($id);
     }
 
     /**
