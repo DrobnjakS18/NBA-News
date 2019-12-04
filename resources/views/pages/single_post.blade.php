@@ -29,7 +29,7 @@
             <img src="{{asset($post['picture'])}}" class="img-responsive" alt="" />
             <div class="b-bottom">
                 <p class="sub">{{$post['text']}}</p>
-                <p>{{"On ".date('M d',strtotime($post['date_published']))}}<a class="span_link" ><span class="glyphicon glyphicon-comment"></span>{{$count_comments}}</a><a class="span_link"><span class="glyphicon glyphicon-eye-open"></span>{{$count_visits}}</a></p>
+                <p>{{"On ".date('M d',strtotime($post['created_at']))}}<a class="span_link" ><span class="glyphicon glyphicon-comment"></span>{{$count_comments}}</a><a class="span_link"><span class="glyphicon glyphicon-eye-open"></span>{{$count_visits}}</a></p>
 
             </div>
         </div>

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class InsertColumnVisits extends Migration
+class CreateCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class InsertColumnVisits extends Migration
      */
     public function up()
     {
-        Schema::table('tests', function (Blueprint $table) {
-            $table->integer('visited')->after('body');
+        Schema::create('categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name',50);
+            $table->timestamps();
         });
     }
 
@@ -25,8 +27,6 @@ class InsertColumnVisits extends Migration
      */
     public function down()
     {
-        Schema::table('tests', function (Blueprint $table) {
-            $table->dropColumn('visited');
-        });
+        Schema::dropIfExists('categories');
     }
 }

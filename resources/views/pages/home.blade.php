@@ -18,7 +18,7 @@
                         <a href="{{route('single_post',['id'=>$post['id']])}}"><img src="{{asset($post['picture'])}}" class="img-responsive" alt="{{$post['alt']}}" /></a>
                         <h5 class="top"><a href="{{route('single_post',['id' => $post['id'],'user_id'=>isset(session('user')->UserId)?session('user')->UserId:null])}}">{{$post['headline']}}</a></h5>
                         <p>{{str_limit($post['text'],240)}}</p>
-                            <p>{{"On ".date('M d',strtotime($post['date_published']))}}<a class="span_link" href="{{route('single_post',['id'=>$post['id']])}}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
+                            <p>{{"On ".date('M d',strtotime($post['created_at']))}}<a class="span_link" href="{{route('single_post',['id'=>$post['id']])}}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
                     </li>
                     @endforeach
                 </ul>
@@ -33,7 +33,7 @@
                     <a href="{{route('single_post',['id'=>$post['id']])}}"><img src="{{asset($post['picture'])}}" class="img-responsive" alt="{{$post['alt']}}"></a>
                     <h5 class="top"><a href="{{route('single_post',['id' => $post['id'],'user_id'=>isset(session('user')->UserId)?session('user')->UserId:null])}}">{{$post['headline']}}</a></h5>
                     <p>{{str_limit($post['text'],240)}}</p>
-                    <p>{{"On ".date('M d',strtotime($post['date_published']))}}<a class="span_link" href="{{route('single_post',['id'=>$post['id']])}}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
+                    <p>{{"On ".date('M d',strtotime($post['created_at']))}}<a class="span_link" href="{{route('single_post',['id'=>$post['id']])}}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
                 </div>
                 @endforeach
             </div>

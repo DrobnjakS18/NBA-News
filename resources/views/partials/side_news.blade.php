@@ -19,7 +19,7 @@
                         </div>
                         <div class="col-md-9 item-details">
                             <h5 class="inner two"><a href="{{route('single_post',['id'=>$late->id])}}">{{$late->headline}}</a></h5>
-                            <div class="td-post-date two"><i class="glyphicon glyphicon-time"></i>{{date('M d,Y',strtotime($late->date_published))}} <a href="#"><i class="glyphicon glyphicon-eye-open"></i>{{$late->BrojPregreda}}</a></div>
+                            <div class="td-post-date two"><i class="glyphicon glyphicon-time"></i>{{date('M d,Y',strtotime($late->created_at))}} <a href="#"><i class="glyphicon glyphicon-eye-open"></i>{{$late->BrojPregreda}}</a></div>
                         </div>
                         <div class="clearfix"></div>
                     </div>
@@ -33,7 +33,7 @@
                         <a href="{{route('single_post',['id'=>$post['id']])}}"><img src="{{asset($post['picture'])}}" class="img-responsive" alt="{{$post['alt']}}"></a>
                         <h5 class="top"><a href="{{asset('/post/'.$post['id'])}}">{{$post['headline']}}</a></h5>
                         <p>{{str_limit($post['text'],240)}}</p>
-                        <p>{{"On ".date('M d',strtotime($post['date_published']))}}<a class="span_link" href="{{route('single_post',['id'=>$post['id']])}}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
+                        <p>{{"On ".date('M d',strtotime($post['created_at']))}}<a class="span_link" href="{{route('single_post',['id'=>$post['id']])}}"><span class="glyphicon glyphicon-circle-arrow-right"></span></a></p>
                     @endforeach
                 </div>
             </div>

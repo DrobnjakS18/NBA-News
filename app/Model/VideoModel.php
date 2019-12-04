@@ -19,10 +19,6 @@ class VideoModel extends Model
     public $title;
     public $url;
 
-    public function getAllVideos(){
-
-        return \DB::table('video')->get();
-    }
 
     public function getOne($id){
 

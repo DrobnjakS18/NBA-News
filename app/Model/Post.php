@@ -119,9 +119,9 @@ class Post extends Model
     public function PostsByVisit(){
 
         return \DB::table('visitors_post')
-            ->selectRaw('posts.id,posts.small_picture ,posts.headline,posts.date_published,count(visitors_post.id) AS BrojPregreda')
+            ->selectRaw('posts.id,posts.small_picture ,posts.headline,posts.created_at,count(visitors_post.id) AS BrojPregreda')
             ->join('posts','visitors_post.id_p','=','posts.id')
-            ->groupBy('posts.small_picture','posts.headline','posts.date_published','posts.id')
+            ->groupBy('posts.small_picture','posts.headline','posts.created_at','posts.id')
             ->orderBy('BrojPregreda','desc')
             ->get();
     }
