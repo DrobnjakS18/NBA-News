@@ -88,21 +88,6 @@
                     {
                         alert(data.success);
                     }
-                    // error:function (xhr,Status,ErrMsg) {
-                    //
-                    //     var status = xhr.status;
-                    //
-                    //     switch(status){
-                    //         case 422:
-                    //             alert('The given data was invalid.');
-                    //             break;
-                    //         case 500:
-                    //             alert('Server error,please come back later');
-                    //             break;
-                    //         default:
-                    //             alert('Application is not working, please come back later');
-                    //     }
-                    // }
                 });
         });
     </script>

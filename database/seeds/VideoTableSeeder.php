@@ -13,28 +13,13 @@ class VideoTableSeeder extends Seeder
     {
         DB::table('video')->insert([
             [
-                'title' => 'Sacramento Kings vs New York Knicks - Full Game Highlights | March 9, 2019',
-                'url' => 'https://www.youtube.com/embed/GrvAeuMXm9k',
+                'title' => 'Los Angeles Lakers vs Utah Jazz Full Game Highlights | December 4, 2019-20 NBA Season   ',
+                'url' => 'AYJQ6YiyzC0',
 
             ],
             [
-                'title' => 'Dallas Mavericks vs Denver Nuggets - Full Game Highlights | March 14, 2019 ',
-                'url' => 'https://www.youtube.com/embed/7mSdGw_6Bvg',
-
-            ],
-            [
-                'title' => 'LA Lakers vs Toronto Raptors - Full Game Highlights | March 14, 2019',
-                'url' => 'https://www.youtube.com/embed/hQW1jioFYTI',
-
-            ],
-            [
-                'title' => 'SOKC Thunder vs Indiana Pacers - Full Game Highlights | March 14, 2019',
-                'url' => 'https://www.youtube.com/embed/66r3PwL_33Q',
-
-            ],
-            [
-                'title' => 'Memphis Grizzlies vs Washington Wizards Full Game Highlights | March 16',
-                'url' => 'https://www.youtube.com/embed/0BYsBeXcPeA',
+                'title' => 'Portland Trail Blazers vs Sacramento Kings Full Game Highlights | December 4, 2019-20 NBA Season',
+                'url' => 'qzPfhWIoJRc  ',
 
             ]
         ]);

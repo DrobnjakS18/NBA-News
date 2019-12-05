@@ -2,16 +2,16 @@
 
 @section('content')
     <div class="card-body">
-        <form  action="{{route('admin_video.update',['id' => $one_video->id])}}" method="POST" enctype="multipart/form-data" >
+        <form  action="{{route('admin_video.update',['id' => $single_video['id']])}}" method="POST" enctype="multipart/form-data" >
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="exampleInputEmail1">Title</label>
-                <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" value="{{$one_video->title}}">
+                <label for="title">Title</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" value="{{$single_video['title']}}">
             </div>
             <div class="form-group">
-                <label for="exampleInputEmail1">Title</label>
-                <input type="url" class="form-control" id="video_url" name="video_url" aria-describedby="emailHelp" value="{{$one_video->url}}">
+                <label for="video_id">Youtube Video ID</label>
+                <input type="text" class="form-control" id="video_id" name="video_id" aria-describedby="emailHelp" value="{{$single_video['url']}}">
             </div>
             <input type="submit" name="sub_user" class="btn btn-primary" value="Submit"/>
         </form>

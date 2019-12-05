@@ -28,12 +28,12 @@
                                 <th>Delete</th>
                             </tr>
                             </thead>
-                            @foreach($video as $clip)
+                            @foreach($videos as $video)
                                 <tbody>
-                                <td>{{$clip->title}}</td>
-                                <td><iframe src="{{$clip->url}}"></iframe></td>
-                                <td><a href="{{route('admin_video.edit',['id' => $clip->id ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
-                                <td><a href="" style="color: red;" onclick="deleteVideo({{$clip->id}})"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td>{{$video['title']}}</td>
+                                <td><iframe src="https://www.youtube.com/embed/{{$video['url']}}"></iframe></td>
+                                <td><a class="btn btn-success" href="{{route('admin_video.edit',['id' => $video['id'] ])}}" style="color: green;"><i class="fas fa-exchange-alt" style="color: white"></i></a></td>
+                                <td> <button class="delete-video btn btn-danger" data-id="{{$video['id']}}"><i class="fas fa-trash-alt"></i></button></td>
                                 </tbody>
                             @endforeach
                         </table>
@@ -57,8 +57,8 @@
                                 <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp">
                             </div>
                             <div class="form-group">
-                                <label for="exampleInputEmail1">URL</label>
-                                <input type="url" class="form-control" id="video_url" name="video_url" aria-describedby="emailHelp" >
+                                <label for="video_id">URL</label>
+                                <input type="text" class="form-control" id="video_id" name="video_id" aria-describedby="emailHelp" >
                             </div>
                             <input type="submit" name="sub_user" class="btn btn-primary" value="Submit"/>
                         </form>
@@ -79,16 +79,21 @@
     @endsection
 @section('scripts')
     <script type="text/javascript">
-        function deleteVideo(id) {
-            $.ajax({
-                type:"GET",
-                url:'/admin_video/'+id+'/delete',
-                dataType:'json',
-                success:function(){
-                },
-                error:function () {
-                }
-            });
-        }
+        $(".delete-video").click(function(){
+            var id = $(this).data("id");
+            $.ajax(
+                {
+                    url: "admin_video/"+id,
+                    type: 'DELETE',
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                    },
+                    success: function (data)
+                    {
+                        alert(data.success);
+                    }
+                });
+        });
     </script>
 @endsection

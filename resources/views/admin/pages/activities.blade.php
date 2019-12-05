@@ -17,10 +17,10 @@
                                 <th>Activities</th>
                             </tr>
                             </thead>
-                            @foreach($activities as $action)
+                            @foreach($activities as $activity)
                                 <tbody>
-                                <td>{{$action->date}}</td>
-                                <td>{{$action->text}}</td>
+                                <td>{{$activity['datum']}}</td>
+                                <td>{{$activity['text']}}</td>
                                 </tbody>
                             @endforeach
                         </table>

@@ -5,16 +5,13 @@ namespace NbaNews\Http\Controllers\Admin;
 use NbaNews\Http\Controllers\BaseContoller;
 use Illuminate\Http\Request;
 use NbaNews\Http\Controllers\Controller;
+use NbaNews\Model\Users;
 
 class ActivityController extends BaseContoller
 {
 
     public function index(){
-
-        $act = new \NbaNews\Model\Users();
-
-
-        $this->data['activities'] = $act->getAllActivities();
+        $this->data['activities'] = Users::paginate(15);
 
         return view('admin.pages.activities',$this->data);
     }

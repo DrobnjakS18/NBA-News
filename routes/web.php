@@ -61,10 +61,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');
 
     Route::resource('admin_category','Admin\CategoryController');
-
     Route::resource('admin_video','Admin\VideoController');
-    Route::get("/admin_video/{id}/delete",'Admin\VideoController@destroy');
-
 
     Route::get('/activities','Admin\ActivityController@index');
     Route::get('/activities/sort','Admin\ActivityController@sortByDate');

@@ -16,7 +16,7 @@ class VideoController extends BaseContoller
      */
     public function index()
     {
-        $this->data['video'] = VideoModel::all();
+        $this->data['videos'] = VideoModel::all();
 
         return view('admin.pages.video',$this->data);
     }
@@ -39,22 +39,18 @@ class VideoController extends BaseContoller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'title' =>'required|min:3|max:255',
-            'video_url' => 'required|url|max:255'
+            'video_id' => 'required|max:255'
         ]);
 
-         $replaced = \Str::replaceArray('watch?v=',['embed/'],$request->video_url);
-
-
-         $video = new VideoModel();
-
-         $video->title = $request->title;
-         $video->url = $replaced;
-
          try{
-             $video->insertVideo();
+
+             $video = new VideoModel();
+
+             $video->title = $request->title;
+             $video->url = $request->video_id;
+             $video->save();
 
              return redirect()->back()->with('insert_video_success','You have successfully inserted a new video');
 
@@ -63,10 +59,6 @@ class VideoController extends BaseContoller
              \Log::critical('Insert VideoController error '.$e->getMessage());
              return redirect()->back()->with('insert_video_error','Application is not working, please come back later');
          }
-
-
-
-
     }
 
     /**
@@ -88,9 +80,7 @@ class VideoController extends BaseContoller
      */
     public function edit($id)
     {
-        $one_video = new VideoModel();
-
-        $this->data['one_video'] = $one_video->getOne($id);
+        $this->data['single_video'] = VideoModel::find($id);
 
         return view('admin.update.update_video',$this->data);
     }
@@ -106,17 +96,16 @@ class VideoController extends BaseContoller
     {
         $request->validate([
             'title' =>'required|min:3|max:255',
-            'video_url' => 'required|url|max:255'
+            'video_id' => 'required|max:255'
         ]);
 
-
-        $update_video = new VideoModel();
-
-        $update_video->title = $request->title;
-        $update_video->url = $request->video_url;
-
         try{
-            $update_video->updateVideo($id);
+            $update_video = VideoModel::find($id);
+
+            $update_video->title = $request->title;
+            $update_video->url = $request->video_id;
+
+            $update_video->save();
 
             return redirect('/admin_video')->with('update_video_success','You have successfully update a new video');
 
@@ -136,14 +125,12 @@ class VideoController extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_video = new VideoModel();
-
         try{
-            $delete_video->id = $id;
+            VideoModel::destroy($id);
 
-            $delete_video->deleteVideo();
-
-
+            return response()->json([
+                'success' => 'Record has been deleted successfully! Please refresh the page'
+            ]);
         }catch(\Exception $e){
 
             \Log::critical('Delete user failed'.$e->getMessage());
