@@ -17,15 +17,12 @@ class CreateVisitorsPostTable extends Migration
             $table->bigIncrements('id');
             $table->timestamps();
 
-            $table->unsignedBigInteger('id_p');
-            $table->unsignedBigInteger('id_u')->nullable();
+            $table->unsignedBigInteger('post_id');
+            $table->unsignedBigInteger('user_id')->nullable();
 
-        });
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
-
-        Schema::table('visitors_post', function (Blueprint $table) {
-            $table->foreign('id_p')->references('id')->on('posts')->onDelete('cascade');
-            $table->foreign('id_u')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

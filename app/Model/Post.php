@@ -84,43 +84,24 @@ class Post extends Model
                 'headline' => $this->headline,
                 'text' => $this->text,
                 'cat_id' => $this->catId
-
-            ]);
-
-    }
-
-    public function deletePost(){
-
-        \DB::transaction(function (){
-
-            \DB::table('comments')
-                ->where('id_p',$this->id)
-                ->delete();
-
-            \DB::table('visitors_post')
-                ->where('id_p',$this->id)
-                ->delete();
-
-            \DB::table('posts')
-                ->where('id',$this->id)
-                ->delete();
-        });
-    }
-
-    public function VisitedPost($id_p,$id_u = null){
-
-        \DB::table('visitors_post')
-            ->insert([
-                'id_p' => $id_p,
-                'id_u' => $id_u
             ]);
     }
+
+
+//    public function VisitedPost($id_p,$id_u = null){
+//
+//        \DB::table('visitors_post')
+//            ->insert([
+//                'post_id' => $id_p,
+//                'user_id' => $id_u
+//            ]);
+//    }
 
     public function PostsByVisit(){
 
         return \DB::table('visitors_post')
             ->selectRaw('posts.id,posts.small_picture ,posts.headline,posts.created_at,count(visitors_post.id) AS BrojPregreda')
-            ->join('posts','visitors_post.id_p','=','posts.id')
+            ->join('posts','visitors_post.post_id','=','posts.id')
             ->groupBy('posts.small_picture','posts.headline','posts.created_at','posts.id')
             ->orderBy('BrojPregreda','desc')
             ->get();
@@ -129,12 +110,11 @@ class Post extends Model
     public function AllPostByComments($username){
 
         return \DB::table('comments')
-            ->join('posts','comments.id_p','=','posts.id')
-            ->join('users','comments.id_u','=','users.id')
+            ->join('posts','comments.post_id','=','posts.id')
+            ->join('users','comments.user_id','=','users.id')
             ->where('username',$username)
             ->paginate(3);
     }
-
 
 
 }

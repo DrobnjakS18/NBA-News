@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
              GalleryTableSedder::class,
              ActivitiesTableSeeder::class,
              CommentsTableSeeder::class,
-             SubCommentTableSeeder::class
+             ReplyTableSeeder::class
          ]);
     }
 }

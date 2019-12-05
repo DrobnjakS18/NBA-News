@@ -143,19 +143,15 @@ class Users extends Model
     }
 
 
-    public function insertActivities(){
 
+    //NE BRISATE OVAJ QUERY BUILDER, SREDITI GA U BUDUCNOSTI
+    public function insertActivities(){
         \DB::table('activities')
             ->insert([
                 'text' => $this->text,
                 'user_id' => $this->user_id,
                 'day' => date('Y-m-d',time())
             ]);
-    }
-
-    public function getAllActivities(){
-
-        return \DB::table('activities')->paginate(15);
     }
 
     public function filterDate($date){
@@ -173,7 +169,6 @@ class Users extends Model
             ->join('role as r','us.role_id','=','r.id_role')
             ->get();
     }
-
 
     public  function  getOne($id){
 

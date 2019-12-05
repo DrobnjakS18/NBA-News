@@ -18,7 +18,7 @@ class Comment extends Model
 //    public $user_id;
 //    public $id;
 
-    protected $primaryKey = 'com_id';
+
 
 //    public function users()
 //    {
@@ -39,10 +39,10 @@ class Comment extends Model
 
         return \DB::table('comments')
             ->select('*')
-            ->join('posts','comments.id_p','=','posts.id')
-            ->join('users','comments.id_u','=','users.id')
-            ->where('id_p',$id)
-            ->orderBy('date_comment','asc')
+            ->join('posts','comments.post_id','=','posts.id')
+            ->join('users','comments.user_id','=','users.id')
+            ->where('post_id',$id)
+//            ->orderBy('created_at','asc')
             ->get();
     }
 
@@ -53,7 +53,7 @@ class Comment extends Model
             \DB::transaction(function(){
 
 
-                \DB::table('subcommnets')
+                \DB::table('reply')
                     ->where('id_c',$this->id)
                     ->delete();
 
@@ -76,50 +76,50 @@ class Comment extends Model
     public function updateComment($id){
 
         \DB::table('comments')
-            ->where('com_id',$id)
+            ->where('id',$id)
             ->update([
-                'com' => $this->com
+                'comment' => $this->com
             ]);
     }
 
     public function CountCommentsForPost($id){
 
         return \DB::table('comments')
-            ->where('id_p',$id)
+            ->where('post_id',$id)
             ->count();
     }
 
 
     public function getAllReplies(){
 
-        return \DB::table('subcommnets')
-            ->join('comments','subcommnets.id_c','=','comments.com_id')
-            ->join('posts','comments.id_p','=','posts.id')
-            ->join('users','subcommnets.id_user','=','users.id')
+        return \DB::table('reply')
+            ->join('comments','reply.comment_id','=','comments.id')
+            ->join('posts','comments.post_id','=','posts.id')
+            ->join('users','reply.user_id','=','users.id')
             ->get();
     }
 
     public function subReplayComment($id){
 
-        \DB::table('subcommnets')
+        \DB::table('reply')
             ->insert([
                 'reply'=>$this->com,
-                'id_c'=>$id,
-                'id_user' => $this->user_id
+                'comment_id'=>$id,
+                'user_id' => $this->user_id
             ]);
     }
 
     public function delReply($id){
 
-        \DB::table('subcommnets')
-            ->where('rep_id',$id)
+        \DB::table('reply')
+            ->where('id',$id)
             ->delete();
     }
 
     public function updateReply($id){
 
-        \DB::table('subcommnets')
-            ->where('rep_id',$id)
+        \DB::table('reply')
+            ->where('id',$id)
             ->update([
                 'reply' => $this->com
             ]);

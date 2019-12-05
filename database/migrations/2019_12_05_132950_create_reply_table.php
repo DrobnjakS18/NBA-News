@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSubcommentsTable extends Migration
+class CreateReplyTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateSubcommentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('subcomments', function (Blueprint $table) {
+        Schema::create('reply', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('reply');
+            $table->text('comment');
             $table->timestamps();
 
             $table->unsignedBigInteger('comment_id');
@@ -33,6 +33,6 @@ class CreateSubcommentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subcomments');
+        Schema::dropIfExists('reply');
     }
 }

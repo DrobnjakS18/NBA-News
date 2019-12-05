@@ -125,7 +125,7 @@ class CategoryController extends BaseContoller
             Category::destroy($id);
 
             return response()->json([
-                'success' => 'Record has been deleted successfully! Please refresh the page'
+                'success' => 'Record has been deleted successfully via ajax! Please refresh the page'
             ]);
         }catch(\Exception $e){
 

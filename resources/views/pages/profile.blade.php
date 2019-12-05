@@ -89,7 +89,7 @@
                                     <img class="card-img-top" src="{{asset($com_view->small_picture)}}" alt="{{$com_view->alt}}" width="150">
                                     <div class="card-body text-center">
                                         <h5 class="card-title">{{$com_view->headline}}</h5>
-                                        <a href="{{route('single_post',['id' =>$com_view->id_p,'user_id'=>$com_view->id_u])}}" class="btn btn-success">View Post</a>
+                                        <a href="{{route('single_post',['id' =>$com_view->post_id,'user_id'=>$com_view->user_id])}}" class="btn btn-success">View Post</a>
                                     </div>
                                 </div>
                             </div>
@@ -140,7 +140,7 @@
 </div>
     @endsection
 
-@section('script')
+@section('scripts')
     @parent
     <script type="text/javascript">
         function editProfile(id){

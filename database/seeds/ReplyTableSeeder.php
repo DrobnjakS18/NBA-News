@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class SubCommentTableSeeder extends Seeder
+class ReplyTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,9 +11,9 @@ class SubCommentTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('subcomments')->insert([
+        DB::table('reply')->insert([
             [
-                'reply' => 'Nice',
+                'comment' => 'Nice',
                 'comment_id' => 1,
                 'user_id' => 1
             ]

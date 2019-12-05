@@ -117,11 +117,7 @@ class PostController extends BaseContoller
      */
     public function edit($id)
     {
-        $one_post = new Post();
-
-        $this->data['one_post'] = $one_post->getOne($id);
-
-
+        $this->data['one_post'] = Post::find($id);
         $this->data['category'] = Category::all();
 
         return view('admin.update.update_news',$this->data);
@@ -243,14 +239,12 @@ class PostController extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_post = new Post();
-
         try{
-            $delete_post->id = $id;
+            Post::destroy($id);
 
-            $delete_post->deletePost();
-
-
+            return response()->json([
+                'success' => 'Record has been deleted successfully via ajax! Please refresh the page'
+            ]);
         }catch(\Exception $e){
 
             \Log::critical('Delete post failed'.$e->getMessage());

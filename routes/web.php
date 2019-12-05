@@ -58,7 +58,7 @@ Route::group(['middleware' => ['admin']], function () {
     Route::resource('gallery','GalleryController')->except(['index']);
 
     Route::resource('admin_news','Admin\PostController');
-    Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');
+//    Route::get("/admin_news/{id}/delete",'Admin\PostController@destroy');
 
     Route::resource('admin_category','Admin\CategoryController');
     Route::resource('admin_video','Admin\VideoController');

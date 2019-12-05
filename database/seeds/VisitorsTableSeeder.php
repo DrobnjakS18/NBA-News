@@ -13,12 +13,12 @@ class VisitorsTableSeeder extends Seeder
     {
         DB::table('visitors_post')->insert([
             [
-                'id_p' => 1,
-                'id_u' => 1
+                'post_id' => 1,
+                'user_id' => 1
             ],
             [
-                'id_p' => 2,
-                'id_u' => 1
+                'post_id' => 2,
+                'user_id' => 1
             ]
         ]);
     }

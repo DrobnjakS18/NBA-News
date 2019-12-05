@@ -43,9 +43,9 @@ class   CommentController extends Controller
 
         $comment = new Comment;
 
-        $comment->com = $request->comment_area;
-        $comment->id_p = $request->post_id;
-        $comment->id_u = $request->user_id;
+        $comment->comment = $request->comment_area;
+        $comment->post_id = $request->post_id;
+        $comment->user_id = $request->user_id;
 
         if (session('user')) {
             $activities = new Users();
@@ -58,6 +58,7 @@ class   CommentController extends Controller
             }
             catch(\Exception $e){
                 \Log::info('CommentCon insert failed error'.$e->getMessage());
+                dd($e->getMessage());
                 return redirect()->back()->with('show_error','Application is not working, please come back later');
             }
         } else {

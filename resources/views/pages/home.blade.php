@@ -40,7 +40,7 @@
             <div class="clearfix"> </div>
         </div>
             <div class="pagination_center">
-                {{$pagination->links()}}
+{{--                {{$pagination->links()}}--}}
             </div>
         </div>
     @include('partials.side_news')

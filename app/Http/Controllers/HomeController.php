@@ -28,13 +28,19 @@ class HomeController extends BaseContoller
 
     public function single($id, $userID = null)
     {
-        $visited = new Post();
+        $posts = new Post();
 
-        $visited->VisitedPost($id, $userID);
-        $this->data['most'] =$visited->PostsByVisit();
+        $visits = new Visit;
 
-        $this->data['count_visits'] = Visit::where('id_p',$id)->count();
-        $this->data['count_comments'] = Comment::where('id_p',$id)->count();
+        $visits->post_id = $id;
+        $visits->user_id = $userID;
+
+        $visits->save();
+
+        $this->data['most'] =$posts->PostsByVisit();
+
+        $this->data['count_visits'] = Visit::where('post_id',$id)->count();
+        $this->data['count_comments'] = Comment::where('post_id',$id)->count();
 
         $com = new Comment();
 

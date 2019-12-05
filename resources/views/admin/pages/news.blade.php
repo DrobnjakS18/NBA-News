@@ -35,7 +35,7 @@
                                 <td><img src="{{asset($post['small_picture'])}}"  alt="{{$post['alt']}}"></td>
                                 <td>{{date('M d Y',strtotime($post['created_at']))}}</td>
                                 <td><a href="{{route('admin_news.edit',['id' => $post['id'] ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
-                                <td><a href="" style="color: red;" onclick="deleteNews({{$post['id']}})"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td><button class="delete-post btn btn-danger" data-id="{{$post['id']}}"><i class="fas fa-trash-alt"></i></button></td>
                                 </tbody>
                             @endforeach
                         </table>
@@ -97,16 +97,21 @@
 
 @section('scripts')
     <script type="text/javascript">
-        function deleteNews(id) {
-            $.ajax({
-                type:"GET",
-                url:'/admin_news/'+id+'/delete',
-                dataType:'json',
-                success:function(){
-                },
-                error:function () {
-                }
-            });
-        }
+        $(".delete-post").click(function(){
+            var id = $(this).data("id");
+            $.ajax(
+                {
+                    url: "admin_news/"+id,
+                    type: 'DELETE',
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                    },
+                    success: function (data)
+                    {
+                        alert(data.success);
+                    }
+                });
+        });
     </script>
     @endsection

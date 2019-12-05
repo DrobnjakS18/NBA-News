@@ -49,18 +49,18 @@
                     <h5><a>{{$com->username}}</a></h5>
                 </div>
                 <div class="media-body response-text-right ">
-                    <div id="comment_ajax_{{$com->com_id}}">
-                        <p>{{$com->com}}</p>
+                    <div id="comment_ajax_{{$com->id}}">
+                        <p>{{$com->comment}}</p>
                     </div>
-                    <div id="update_comment_ajax_{{$com->com_id}}" style="display: none;"></div>
+                    <div id="update_comment_ajax_{{$com->id}}" style="display: none;"></div>
                     <ul>
-                        <li>{{date('M d,Y',strtotime($com->date_comment))}}</li>
+                        <li>{{date('M d,Y',strtotime($com->created_at))}}</li>
                         @isset(session('user')->UserId)
-                        <li><a href="#response_tag" class="rep_com" onclick="show({{$com->com_id}})" data-id="{{$com->com_id}}">Reply</a></li>
-                        <div id="rep_form_{{$com->com_id}}" style="display: none;">
+                        <li><a href="#response_tag" class="rep_com" onclick="show({{$com->id}})" data-id="{{$com->id}}">Reply</a></li>
+                        <div id="rep_form_{{$com->id}}" style="display: none;">
                             <div class="media response-info">
                                 <div class="media-body response-text-right">
-                                    <form action="{{route('reply_comment',['id'=>$com->com_id])}}" method="POST">
+                                    <form action="{{route('reply_comment',['id'=>$com->id])}}" method="POST">
                                         @csrf
                                         <textarea rows="4" cols="67" id="text_rep" name="text_rep"></textarea>
                                         <input type="hidden" name="user_id" value="{{session('user')->UserId}}"/>
@@ -70,9 +70,9 @@
                                     <div class="clearfix"> </div>
                             </div>
                         </div>
-                        @if($com->id_u == session('user')->UserId)
+                        @if($com->user_id == session('user')->UserId)
                         <li>
-                            <form action="{{route('comments.destroy',['id'=>$com->com_id])}}" method="post">
+                            <form action="{{route('comments.destroy',['id'=>$com->id])}}" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button >Delete</button>
@@ -101,7 +101,7 @@
                             @endisset
                                                                         {{--REPLAY--}}
                         @foreach($reply as $rep)
-                            @if($com->com_id == $rep->id_c)
+                            @if($com->id == $rep->comment_id)
                         <div class="media response-info">
                             <div class="media-left response-text-left">
                                 <a>
@@ -110,13 +110,13 @@
                                 <h5><a href="#">{{$rep->username}}</a></h5>
                             </div>
                             <div class="media-body response-text-right">
-                                <span id="reply_ajax_{{$rep->rep_id}}"><p>{{$rep->reply}}</p></span>
-                                <span id="update_reply_ajax_{{$rep->rep_id}}" style="display: none;"></span>
+                                <span id="reply_ajax_{{$rep->id}}"><p>{{$rep->reply}}</p></span>
+                                <span id="update_reply_ajax_{{$rep->id}}" style="display: none;"></span>
                                 <ul>
-                                    <li>{{date('M d,Y',strtotime($rep->date_comment))}}</li>
+                                    <li>{{date('M d,Y',strtotime($rep->created_at))}}</li>
                                     @isset(session('user')->UserId)
-                                        @if($rep->id_user == session('user')->UserId)
-                                        <li><a href="{{route('reply_del',['id'=>$rep->rep_id])}}">Delete</a></li>
+                                        @if($rep->user_id == session('user')->UserId)
+                                        <li><a href="{{route('reply_del',['id'=>$rep->id])}}">Delete</a></li>
                                         <li><a data-toggle="modal" href="#myModalReply">Update</a></li>
                                         <div id="myModalReply" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
@@ -128,10 +128,10 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <textarea rows="4" cols="67" id="update_reply_modal" >{{$rep->reply}}</textarea>
-                                                        <input type="hidden" id="rep_id" value="{{$rep->rep_id}}"/>
+                                                        <input type="hidden" id="rep_id" value="{{$rep->id}}"/>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_modal_reply" onclick="update_rep({{$rep->rep_id}})">Save</button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_modal_reply" onclick="update_rep({{$rep->id}})">Save</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -139,7 +139,7 @@
                                     @endif
                                         @endisset
                                 </ul>
-                            <div class="clearfix"> </div>
+                            <div class="clearfix"></div>
                         </div>
                             @endif
                         @endforeach
