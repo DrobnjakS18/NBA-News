@@ -21,7 +21,9 @@ class DatabaseSeeder extends Seeder
              MeniTableSeeder::class,
              VideoTableSeeder::class,
              GalleryTableSedder::class,
-             ActivitiesTableSeeder::class
+             ActivitiesTableSeeder::class,
+             CommentsTableSeeder::class,
+             SubCommentTableSeeder::class
          ]);
     }
 }
