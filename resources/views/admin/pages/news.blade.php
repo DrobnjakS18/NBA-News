@@ -31,11 +31,11 @@
                             </thead>
                             @foreach($news as $post)
                                 <tbody>
-                                <td>{{$post->headline}}</td>
-                                <td><img src="{{asset($post->small_picture)}}"  alt="{{$post->alt}}"></td>
-                                <td>{{date('M d Y',strtotime($post->created_at))}}</td>
-                                <td><a href="{{route('admin_news.edit',['id' => $post->id ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
-                                <td><a href="" style="color: red;" onclick="deleteNews({{$post->id}})"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td>{{$post['headline']}}</td>
+                                <td><img src="{{asset($post['small_picture'])}}"  alt="{{$post['alt']}}"></td>
+                                <td>{{date('M d Y',strtotime($post['created_at']))}}</td>
+                                <td><a href="{{route('admin_news.edit',['id' => $post['id'] ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
+                                <td><a href="" style="color: red;" onclick="deleteNews({{$post['id']}})"> <i class="fas fa-trash-alt"></i></a></td>
                                 </tbody>
                             @endforeach
                         </table>

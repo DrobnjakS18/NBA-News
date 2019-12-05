@@ -45,17 +45,16 @@ class CategoryController extends BaseContoller
 
             'title' => 'required|min:2',
         ]);
-
-        $insert_cat = new \NbaNews\Model\Category();
+        $insert_cat = new Category;
 
         try{
             $insert_cat->name = $request->title;
-
-            $insert_cat->insertCat();
+            $insert_cat->save();
 
             return redirect()->back()->with('insert_category_success','You successfully inserted a category');
         }catch(\Exception $e){
             \Log::critical('Failed to insert gallery picture error: '.$e->getMessage());
+
             return redirect()->back()->with('insert_category_error','Application is not working, please come back later');
         }
 
@@ -80,9 +79,7 @@ class CategoryController extends BaseContoller
      */
     public function edit($id)
     {
-        $one_cat = new \NbaNews\Model\Category();
-
-        $this->data['one_cat'] = $one_cat->getOne($id);
+        $this->data['single_category'] = Category::find($id);
 
         return view('admin.update.update_category',$this->data);
     }
@@ -97,16 +94,15 @@ class CategoryController extends BaseContoller
     public function update(Request $request, $id)
     {
         $request->validate([
-
             'title' => 'required|min:2',
         ]);
 
-        $update_cat = new \NbaNews\Model\Category();
-
-        $update_cat->name = $request->title;
-
         try{
-            $update_cat->updateCat($id);
+            $update_category = Category::find($id);
+
+            $update_category->name = $request->title;
+
+            $update_category->save();
 
             return redirect('/admin_category')->with('update_category_success','You successfully update a category');
         }catch(\Exception $e){
@@ -125,15 +121,12 @@ class CategoryController extends BaseContoller
      */
     public function destroy($id)
     {
-        $delete_cat = new \NbaNews\Model\Category();
-
-
         try{
-            $delete_cat->id = $id;
+            Category::destroy($id);
 
-            $delete_cat->deleteCat();
-
-
+            return response()->json([
+                'success' => 'Record has been deleted successfully! Please refresh the page'
+            ]);
         }catch(\Exception $e){
 
             \Log::critical('Delete user failed'.$e->getMessage());

@@ -21,7 +21,7 @@ class PostController extends BaseContoller
     {
         $posts = new Post();
 
-        $this->data['news'] = $posts->getAll();
+        $this->data['news'] = Post::all();
 
         $this->data['category'] = Category::all();
 

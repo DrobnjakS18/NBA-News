@@ -93,11 +93,7 @@ class UserController extends BaseContoller
     public function edit($id)
     {
 
-
-
         $users = new Users();
-
-        $this->data['role'] = $users->roles();
 
         try {
 

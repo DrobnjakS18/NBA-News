@@ -29,9 +29,9 @@
                             </thead>
                             @foreach($category as $cat)
                                 <tbody>
-                                <td>{{$cat->name}}</td>
-                                <td><a href="{{route('admin_category.edit',['id' => $cat->id_cat ])}}" style="color: green;"><i class="fas fa-exchange-alt"></i></a></td>
-                                <td><a href="" style="color: red;" onclick="deleteCat({{$cat->id_cat}})"> <i class="fas fa-trash-alt"></i></a></td>
+                                <td>{{$cat['name']}}</td>
+                                <td><a class="btn btn-success" href="{{route('admin_category.edit',['id' => $cat['id'] ])}}" style="color: green;"><i class="fas fa-exchange-alt" style="color: white"></i></a></td>
+                                <td><button class="delete-category btn btn-danger" data-id="{{$cat['id']}}"><i class="fas fa-trash-alt"></i></button></td>
                                 </tbody>
                             @endforeach
                         </table>
@@ -74,16 +74,36 @@
 
 @section('scripts')
     <script type="text/javascript">
-        function deleteCat(id) {
-            $.ajax({
-                type:"GET",
-                url:'/admin_category/'+id+'/delete',
-                dataType:'json',
-                success:function(){
-                },
-                error:function () {
-                }
-            });
-        }
+        $(".delete-category").click(function(){
+            var id = $(this).data("id");
+            $.ajax(
+                {
+                    url: "admin_category/"+id,
+                    type: 'DELETE',
+                    dataType: "json",
+                    data: {
+                        "id": id,
+                    },
+                    success: function (data)
+                    {
+                        alert(data.success);
+                    }
+                    // error:function (xhr,Status,ErrMsg) {
+                    //
+                    //     var status = xhr.status;
+                    //
+                    //     switch(status){
+                    //         case 422:
+                    //             alert('The given data was invalid.');
+                    //             break;
+                    //         case 500:
+                    //             alert('Server error,please come back later');
+                    //             break;
+                    //         default:
+                    //             alert('Application is not working, please come back later');
+                    //     }
+                    // }
+                });
+        });
     </script>
 @endsection

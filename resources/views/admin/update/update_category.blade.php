@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="card-body">
-        <form  action="{{route('admin_category.update',['id' => $one_cat->id_cat])}}" method="POST" enctype="multipart/form-data" >
+        <form action="{{route('admin_category.update',['id' => $single_category['id']])}}" method="POST" enctype="multipart/form-data" >
             @method('PUT')
             @csrf
             <div class="form-group">
-                <label for="exampleInputEmail1">Category Name</label>
-                <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" value="{{$one_cat->name}}">
+                <label for="title">Category Name</label>
+                <input type="text" class="form-control" id="title" name="title" aria-describedby="emailHelp" value="{{$single_category['name']}}">
             </div>
             <input type="submit" name="sub_user" class="btn btn-primary" value="Submit"/>
         </form>

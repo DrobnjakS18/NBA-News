@@ -132,7 +132,7 @@ class Users extends Model
 
         return \DB::table('users as us')
             ->select('*','us.id as UserId')
-            ->join('role as r','us.role_id','=','r.id_role')
+            ->join('role as r','us.role_id','=','r.id')
             ->where([
                 ['username',$user],
                 ['password',md5($pass)]
