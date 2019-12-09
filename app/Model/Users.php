@@ -143,17 +143,6 @@ class Users extends Model
     }
 
 
-
-    //NE BRISATE OVAJ QUERY BUILDER, SREDITI GA U BUDUCNOSTI
-    public function insertActivities(){
-        \DB::table('activities')
-            ->insert([
-                'text' => $this->text,
-                'user_id' => $this->user_id,
-                'day' => date('Y-m-d',time())
-            ]);
-    }
-
     public function filterDate($date){
 
         return \DB::table('activities')

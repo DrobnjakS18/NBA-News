@@ -22,7 +22,7 @@ composer install
 
 
 7)Set database
-CREATE DATABASE threedium DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
+CREATE DATABASE nba_news DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
 
 8)podesiti .env fajl po ugledu na .env.example fajl.
 

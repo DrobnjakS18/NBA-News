@@ -2,6 +2,7 @@
 
 namespace NbaNews\Http\Controllers;
 
+use NbaNews\Model\Activity;
 use NbaNews\Model\Users;
 use NbaNews\User;
 use Illuminate\Http\Request;
@@ -25,13 +26,10 @@ class LoginController extends BaseContoller
         session(['user' => $log]);
 
         if(session('user')){
-
-            $activities = new Users();
-            $activities->user_id = session('user')->UserId;
+            $activities = new Activity;
             $activities->text = "Users ".session('user')->username." logged in";
-
-            $activities->insertActivities();
-
+            $activities->user_id = session('user')->UserId;
+            $activities->save();
             return redirect('/')->with('login_success',"Welcome ".session('user')->username);
         }else {
             \Log::critical('Ip address '.$request->ip().', user not found');
@@ -41,19 +39,14 @@ class LoginController extends BaseContoller
     }
 
     public function destroy(){
-
-            $activities = new Users();
-            $activities->user_id = session('user')->UserId;
-            $activities->text = "Users ".session('user')->username." logout.";
-
             try{
-                $activities->insertActivities();
-            }
-            catch(\Exception $e){
-
+                $activities = new Activity;
+                $activities->text = "Users ".session('user')->username." logout.";
+                $activities->user_id = session('user')->UserId;
+                $activities->save();
+            } catch (\Exception $e) {
                 \Log::critical('Reply activities failed error'.$e->getMessage());
             }
-
 
         session()->flush();
         return redirect('/');
