@@ -18,10 +18,8 @@ Route::get('/about', "HomeController@about");
 Route::get('/search','HomeController@search');
 
 Route::resource('comments','CommentController');
+Route::resource('replies', 'ReplyController');
 
-//COMMENTS
-Route::post('/comment/{id}/reply','CommentCon@reply')->name('reply_comment');
-Route::get('/reply/{id}','CommentCon@deleteReply')->name('reply_del');
 Route::put('/reply/{id}','CommentCon@updateReply');
 
 //GALLERY

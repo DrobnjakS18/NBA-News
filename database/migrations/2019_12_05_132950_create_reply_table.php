@@ -7,7 +7,7 @@ use Illuminate\Database\Migrations\Migration;
 class CreateReplyTable extends Migration
 {
     /**
-     * Run the migrations.
+     * Run the migrations.F
      *
      * @return void
      */
@@ -15,7 +15,7 @@ class CreateReplyTable extends Migration
     {
         Schema::create('reply', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('comment');
+            $table->text('reply');
             $table->timestamps();
 
             $table->unsignedBigInteger('comment_id');

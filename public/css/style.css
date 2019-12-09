@@ -1,256 +1,3 @@
-
-/*MY CSS*/
-
-
-#tekst_autor a:hover{
-    color: orangered;
-}
-
-.card-header h3{
-
-    padding-top: 30px;
-}
-
-.ltr{
-    width: 350px;
-    padding-left: 20px;
-}
-
-.gs-per-result-labels{
-
-    padding-left: 20px;
-    padding-top: 15px;
-}
-
-.search_block {
-
-    margin-left: 100px;
-    margin-top: 50px;
-}
-.search_block img {
-
-    border-radius: 5%;
-}
-
-.gs-title {
-
-    padding-bottom: 10px;
-}
-
-
-#autor_centar h3{
-
-    text-align: center;
-}
-
-#autor_centar{
-
-    width: 100%;
-    text-align: center;
-    margin-top: 150px;
-    margin-bottom: 200px;
-}
-#autor_slika img {
-
-    margin-top: 50px;
-    border-radius: 10%;
-}
-
-
-#tekst_autor{
-    width: 20%;
-    text-align: center;
-    margin:auto;
-    font-size: 20px;
-    font-weight:bold;
-}
-
-#tekst_autor a{
-
-    color:orange;
-}
-
-#tekst p {
-
-    font-family: OSWALD-regular;
-}
-#sub_rep {
-    background: #4A245E;
-    border: 1px solid #4A245E;
-    padding: .8em 0;
-    width: 30%;
-    margin-top: .5em;
-    font-size: 15px;
-    color: #fff;
-    letter-spacing: 0.5px;
-    outline: none;
-    transition: .5s all;
-    -webkit-transition: .5s all;
-    -moz-transition: .5s all;
-    -o-transition: .5s all;
-    -ms-transition: .5s all;
-    font-family: 'Open Sans', sans-serif;
-    text-transform:uppercase;
-}
-
-
-
-
-#sub_rep :hover{
-    background:#f26649;
-    border: 1px solid #f26649;
-}
-.pagination_center{
-
-    text-align: center;
-}
-
-.spacing {
-
-    margin-top: 50px;
-    margin-bottom:  500px;
-}
-.highlight_title {
-
-    padding-top: 2em;
-}
-#comment_no_auth {
-
-    margin-top: 50px;
-    background: #4A245E;
-    color:white;
-    padding: 10px;
-    text-align: center;
-}
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px; height: 0; overflow: hidden;
-}
-
-.video-container iframe,
-.video-container object,
-.video-container embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-#reg_errors {
-    display: none;
-}
-
-#log_error {
-    display: none;
-}
-
-
-/*PROFILE*/
-.profile {
-    margin: 20px 0;
-}
-
-/* ProfileController sidebar */
-.profile-sidebar {
-    padding: 20px 0 10px 0;
-    background: #fff;
-}
-
-.profile-userpic img {
-    float: none;
-    margin: 0 auto;
-    width: 50%;
-    height: 50%;
-    -webkit-border-radius: 50% !important;
-    -moz-border-radius: 50% !important;
-    border-radius: 50% !important;
-}
-
-.profile-usertitle {
-    text-align: center;
-    margin-top: 20px;
-}
-
-.profile-usertitle-name {
-    color: #5a7391;
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 7px;
-}
-
-.profile-usertitle-job {
-    text-transform: uppercase;
-    color: #5b9bd1;
-    font-size: 12px;
-    font-weight: 600;
-    margin-bottom: 15px;
-}
-
-.profile-userbuttons {
-    text-align: center;
-    margin-top: 10px;
-}
-
-.profile-userbuttons .btn {
-    text-transform: uppercase;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 6px 15px;
-    margin-right: 5px;
-}
-
-.profile-userbuttons .btn:last-child {
-    margin-right: 0px;
-}
-
-.profile-usermenu {
-    margin-top: 30px;
-}
-
-.profile-usermenu ul li {
-    border-bottom: 1px solid #f0f4f7;
-}
-
-.profile-usermenu ul li:last-child {
-    border-bottom: none;
-}
-
-.profile-usermenu ul li a {
-    color: #93a3b5;
-    font-size: 14px;
-    font-weight: 400;
-}
-
-.profile-usermenu ul li a i {
-    margin-right: 8px;
-    font-size: 14px;
-}
-
-.profile-usermenu ul li a:hover {
-    background-color: #fafcfd;
-    color: #5b9bd1;
-}
-
-.profile-usermenu ul li.active {
-    border-bottom: none;
-}
-
-.profile-usermenu ul li.active a {
-    color: #5b9bd1;
-    background-color: #f6f9fb;
-    border-left: 2px solid #5b9bd1;
-    margin-left: -2px;
-}
-
-/* ProfileController Content */
-.profile-content {
-    padding: 20px;
-    background: #fff;
-    min-height: 460px;
-}
-
 /*TEMPLATE*/
 
 html, body{
@@ -1700,6 +1447,11 @@ ul.bottom i {
   text-indent: 100%;
   background: url(../images/move-top.png) no-repeat 0px 0px;
 }
+
+
+
+
+
 /*--responsive--*/
 @media (max-width:1600px){
 	.top-nav {
@@ -3304,4 +3056,265 @@ ul.bottom i {
 		padding: 1.2em 1em 1.5em 1em;
 		border-right: none;
 	}
+}
+
+
+
+
+/*MY CSS*/
+
+
+#tekst_autor a:hover{
+    color: orangered;
+}
+
+.card-header h3{
+
+    padding-top: 30px;
+}
+
+.ltr{
+    width: 350px;
+    padding-left: 20px;
+}
+
+.gs-per-result-labels{
+
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
+.search_block {
+
+    margin-left: 100px;
+    margin-top: 50px;
+}
+.search_block img {
+
+    border-radius: 5%;
+}
+
+.gs-title {
+
+    padding-bottom: 10px;
+}
+
+
+#autor_centar h3{
+
+    text-align: center;
+}
+
+#autor_centar{
+
+    width: 100%;
+    text-align: center;
+    margin-top: 150px;
+    margin-bottom: 200px;
+}
+#autor_slika img {
+
+    margin-top: 50px;
+    border-radius: 10%;
+}
+
+
+#tekst_autor{
+    width: 20%;
+    text-align: center;
+    margin:auto;
+    font-size: 20px;
+    font-weight:bold;
+}
+
+#tekst_autor a{
+
+    color:orange;
+}
+
+#tekst p {
+
+    font-family: OSWALD-regular;
+}
+#sub_rep {
+    background: #4A245E;
+    border: 1px solid #4A245E;
+    padding: .8em 0;
+    width: 30%;
+    margin-top: .5em;
+    font-size: 15px;
+    color: #fff;
+    letter-spacing: 0.5px;
+    outline: none;
+    transition: .5s all;
+    -webkit-transition: .5s all;
+    -moz-transition: .5s all;
+    -o-transition: .5s all;
+    -ms-transition: .5s all;
+    font-family: 'Open Sans', sans-serif;
+    text-transform:uppercase;
+}
+
+
+
+
+#sub_rep :hover{
+    background:#f26649;
+    border: 1px solid #f26649;
+}
+.pagination_center{
+
+    text-align: center;
+}
+
+.spacing {
+
+    margin-top: 50px;
+    margin-bottom:  500px;
+}
+.highlight_title {
+
+    padding-top: 2em;
+}
+#comment_no_auth {
+
+    margin-top: 50px;
+    background: #4A245E;
+    color:white;
+    padding: 10px;
+    text-align: center;
+}
+.video-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 30px; height: 0; overflow: hidden;
+}
+
+.video-container iframe,
+.video-container object,
+.video-container embed {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#reg_errors {
+    display: none;
+}
+
+#log_error {
+    display: none;
+}
+
+
+/*PROFILE*/
+.profile {
+    margin: 20px 0;
+}
+
+/* ProfileController sidebar */
+.profile-sidebar {
+    padding: 20px 0 10px 0;
+    background: #fff;
+}
+
+.profile-userpic img {
+    float: none;
+    margin: 0 auto;
+    width: 50%;
+    height: 50%;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+}
+
+.profile-usertitle {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-usertitle-name {
+    color: #5a7391;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 7px;
+}
+
+.profile-usertitle-job {
+    text-transform: uppercase;
+    color: #5b9bd1;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.profile-userbuttons {
+    text-align: center;
+    margin-top: 10px;
+}
+
+.profile-userbuttons .btn {
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 6px 15px;
+    margin-right: 5px;
+}
+
+.profile-userbuttons .btn:last-child {
+    margin-right: 0px;
+}
+
+.profile-usermenu {
+    margin-top: 30px;
+}
+
+.profile-usermenu ul li {
+    border-bottom: 1px solid #f0f4f7;
+}
+
+.profile-usermenu ul li:last-child {
+    border-bottom: none;
+}
+
+.profile-usermenu ul li a {
+    color: #93a3b5;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.profile-usermenu ul li a i {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.profile-usermenu ul li a:hover {
+    background-color: #fafcfd;
+    color: #5b9bd1;
+}
+
+.profile-usermenu ul li.active {
+    border-bottom: none;
+}
+
+.profile-usermenu ul li.active a {
+    color: #5b9bd1;
+    background-color: #f6f9fb;
+    border-left: 2px solid #5b9bd1;
+    margin-left: -2px;
+}
+
+/* ProfileController Content */
+.profile-content {
+    padding: 20px;
+    background: #fff;
+    min-height: 460px;
+}
+
+.response-text-right button {
+    border: none;
+    background: white;
+    color: rebeccapurple;
 }

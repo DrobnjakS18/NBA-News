@@ -51,6 +51,8 @@ class HomeController extends BaseContoller
 
         $this->data['reply'] = $com->getAllReplies();
 
+//        dd($this->data['comments']);
+
         $this->data['post'] = Post::where('id',$id)->first();
 
         return view('pages.single_post', $this->data);

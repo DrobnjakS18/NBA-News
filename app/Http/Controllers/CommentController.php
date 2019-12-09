@@ -3,6 +3,7 @@
 namespace NbaNews\Http\Controllers;
 
 use Illuminate\Http\Request;
+use NbaNews\Model\Activity;
 use NbaNews\Model\Comment;
 use NbaNews\Model\Users;
 
@@ -108,28 +109,22 @@ class   CommentController extends Controller
      */
     public function destroy($id)
     {
-        $delete = new Comment();
-
-        $delete->id = $id;
-
-        $activities = new Users();
-        $activities->user_id = session('user')->UserId;
-        $activities->text = "Users ".session('user')->username." deleted his comment ";
 
         try{
-            $activities->insertActivities();
+            $activities = new Activity;
+            $activities->user_id = session('user')->UserId;
+            $activities->text = "Users ".session('user')->username." deleted his comment ";
+            $activities->save();
         } catch (\Exception $e) {
-
             \Log::critical('Reply activities failed error'.$e->getMessage());
         }
 
         try{
-            $delete->deleteComment();
-
+            Comment::destroy($id);
             return redirect()->back();
         } catch (\Exception $e) {
-
             \Log::info('Error deleting comment '.$e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('delete_error','Application is not working, please come back later');
         }
     }

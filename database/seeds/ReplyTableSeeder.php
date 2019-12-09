@@ -13,7 +13,7 @@ class ReplyTableSeeder extends Seeder
     {
         DB::table('reply')->insert([
             [
-                'comment' => 'Nice',
+                'reply' => 'Nice',
                 'comment_id' => 1,
                 'user_id' => 1
             ]

@@ -38,7 +38,7 @@ class Comment extends Model
     public function getAllByPost($id){
 
         return \DB::table('comments')
-            ->select('*')
+            ->select('*','comments.id as comment_id')
             ->join('posts','comments.post_id','=','posts.id')
             ->join('users','comments.user_id','=','users.id')
             ->where('post_id',$id)
@@ -82,39 +82,17 @@ class Comment extends Model
             ]);
     }
 
-    public function CountCommentsForPost($id){
-
-        return \DB::table('comments')
-            ->where('post_id',$id)
-            ->count();
-    }
-
 
     public function getAllReplies(){
 
         return \DB::table('reply')
+            ->select('*', 'reply.id as reply_id')
             ->join('comments','reply.comment_id','=','comments.id')
             ->join('posts','comments.post_id','=','posts.id')
             ->join('users','reply.user_id','=','users.id')
             ->get();
     }
 
-    public function subReplayComment($id){
-
-        \DB::table('reply')
-            ->insert([
-                'reply'=>$this->com,
-                'comment_id'=>$id,
-                'user_id' => $this->user_id
-            ]);
-    }
-
-    public function delReply($id){
-
-        \DB::table('reply')
-            ->where('id',$id)
-            ->delete();
-    }
 
     public function updateReply($id){
 

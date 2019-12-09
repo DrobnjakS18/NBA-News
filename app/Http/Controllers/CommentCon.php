@@ -70,59 +70,6 @@ class CommentCon extends BaseContoller
 
     }
 
-
-    public function reply(Request $request,$id)
-    {
-
-       $request->validate([
-
-           'text_rep' => 'required|max:255'
-       ]);
-
-        $replay = new Comment();
-
-        $replay->com = $request->text_rep;
-        $replay->user_id = $request->user_id;
-
-
-        if(session('user')){
-            $activities = new Users();
-            $activities->user_id = session('user')->UserId;
-            $activities->text = "Users ".session('user')->username." reply ".$request->text_rep;
-            try{
-                $activities->insertActivities();
-            } catch (\Exception $e) {
-
-                \Log::critical('Reply activities failed error'.$e->getMessage());
-            }
-        }
-
-
-
-        try{
-            $replay->subReplayComment($id);
-            return redirect()->back();
-        } catch (\Exception $e) {
-            \Log::critical('CommentCon inser failed error'.$e->getMessage());
-            return redirect()->back()->with('show_error','Application is not working, please come back later');
-        }
-    }
-
-    public function deleteReply($id)
-    {
-        $del = new Comment();
-
-        try{
-            $del->delReply($id);
-
-            return redirect()->back();
-        } catch (\Exception $e) {
-
-            \Log::critical('Error deleting comment '.$e->getMessage());
-            return redirect()->back()->with('show_error','Application is not working, please come back later');
-        }
-    }
-
     public function updateReply(Request $request,$id)
     {
         $request->validate([

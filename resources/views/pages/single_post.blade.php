@@ -24,6 +24,11 @@
                     {{session('sub_comment_success')}}
                 </div>
             @endif
+            @if(session('success_reply_delete'))
+                <div class="alert alert-success">
+                    {{session('success_reply_delete')}}
+                </div>
+            @endif
         <h3 class="tittle">{{$post['headline']}}</h3>
         <div class="single">
             <img src="{{asset($post['picture'])}}" class="img-responsive" alt="" />
@@ -39,7 +44,7 @@
             <div id="response_tag"></div>
                 <h4>Responses</h4>
             <div class="media response-info">
-                                                                {{--COMMENT--}}
+                                                                {{-- || COMMENT--}}
                 @isset($comments)
                 @foreach($comments as $com)
                 <div class="media-left response-text-left " >
@@ -56,50 +61,53 @@
                     <ul>
                         <li>{{date('M d,Y',strtotime($com->created_at))}}</li>
                         @isset(session('user')->UserId)
+
                         <li><a href="#response_tag" class="rep_com" onclick="show({{$com->id}})" data-id="{{$com->id}}">Reply</a></li>
                         <div id="rep_form_{{$com->id}}" style="display: none;">
                             <div class="media response-info">
                                 <div class="media-body response-text-right">
-                                    <form action="{{route('reply_comment',['id'=>$com->id])}}" method="POST">
+                                    <form action="{{route('replies.store',['id'=>$com->id])}}" method="POST">
                                         @csrf
                                         <textarea rows="4" cols="67" id="text_rep" name="text_rep"></textarea>
                                         <input type="hidden" name="user_id" value="{{session('user')->UserId}}"/>
+                                        <input type="hidden" name="comment_id" value="{{$com->id}}"/>
                                         <input type="submit" id="sub_rep" value="Replay"/>
                                     </form>
                                 </div>
                                     <div class="clearfix"> </div>
                             </div>
                         </div>
+
                         @if($com->user_id == session('user')->UserId)
                         <li>
-                            <form action="{{route('comments.destroy',['id'=>$com->id])}}" method="post">
+                            <form action="{{route('comments.destroy',['id'=>$com->comment_id])}}" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button >Delete</button>
                             </form>
                         </li>
-                        <li><a data-toggle="modal" href="#myModal">Update</a></li>
-                                <div id="myModal" class="modal fade" role="dialog">
-                                    <div class="modal-dialog">
-                                        <!-- Modal content-->
-                                        <div class="modal-content text-center">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                <h4 class="modal-title">Update Comment</h4>
-                                            </div>
+                        <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Update</button></li>
+{{--                                <div id="myModal" class="modal fade" role="dialog">--}}
+{{--                                    <div class="modal-dialog">--}}
+{{--                                        <!-- Modal content-->--}}
+{{--                                        <div class="modal-content text-center">--}}
+{{--                                            <div class="modal-header">--}}
+{{--                                                <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
+{{--                                                <h4 class="modal-title">Update Comment</h4>--}}
+{{--                                            </div>--}}
 {{--                                            <form>--}}
 {{--                                                <textarea name="update-field" rows="4" cols="67">--}}
-{{--                                                {{$com->com}}--}}
+{{--                                                {{$com->comment}}--}}
 {{--                                                </textarea>--}}
 {{--                                                <input type="submit" class="btn btn-warning" value="Update" onclick="">--}}
 {{--                                            </form>--}}
 
-                                        </div>
-                                    </div>
-                                </div>
+{{--                                        </div>--}}
+{{--                                    </div>--}}
+{{--                                </div>--}}
                             @endif
                             @endisset
-                                                                        {{--REPLAY--}}
+                                                                        {{-- || REPLAY--}}
                         @foreach($reply as $rep)
                             @if($com->id == $rep->comment_id)
                         <div class="media response-info">
@@ -116,7 +124,14 @@
                                     <li>{{date('M d,Y',strtotime($rep->created_at))}}</li>
                                     @isset(session('user')->UserId)
                                         @if($rep->user_id == session('user')->UserId)
-                                        <li><a href="{{route('reply_del',['id'=>$rep->id])}}">Delete</a></li>
+                                        <li>
+{{--                                            <a href="{{route('replies.destroy',['id'=>$rep->id])}}">Delete</a>--}}
+                                            <form action="{{route('replies.destroy',['id'=>$rep->reply_id])}}" method="post">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button>Delete</button>
+                                            </form>
+                                        </li>
                                         <li><a data-toggle="modal" href="#myModalReply">Update</a></li>
                                         <div id="myModalReply" class="modal fade" role="dialog">
                                             <div class="modal-dialog">
@@ -170,6 +185,28 @@
     </div>
     @include('partials.side_news')
     <div class="clearfix"> </div>
+
+    <!-- Update Comment Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    ...
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('scripts')
@@ -242,8 +279,7 @@
             $('#comment_ajax_'+id).hide();
             var text = $('#update_comment_modal').val();
             var ispis = '<p>'+text+'</p>';
-            $('#update_comment_ajax_'+id).html(ispis);
-            $('#update_comment_ajax_'+id).show();
+            $('#update_comment_ajax_'+id).show().html(ispis);
         }
 
         function update_rep(id) {
@@ -251,8 +287,7 @@
             $('#reply_ajax_'+id).hide();
             var text = $('#update_reply_modal').val();
             var ispis = '<p>'+text+'</p>';
-            $('#update_reply_ajax_'+id).html(ispis);
-            $('#update_reply_ajax_'+id).show();
+            $('#update_reply_ajax_'+id).show().html(ispis);
         }
 
         function show(id) {
