@@ -15,13 +15,13 @@
             @endforeach
         </ul>
         <!-- script-for-nav -->
-        <script>
-            $( "span.menu" ).click(function() {
-                $( ".top-menu ul" ).slideToggle(300, function() {
-                    // Animation complete.
-                });
-            });
-        </script>
+{{--        <script>--}}
+{{--            $( "span.menu" ).click(function() {--}}
+{{--                $( ".top-menu ul" ).slideToggle(300, function() {--}}
+{{--                    // Animation complete.--}}
+{{--                });--}}
+{{--            });--}}
+{{--        </script>--}}
         <!-- script-for-nav -->
         <ul class="side-icons">
             <li><a class="fb" href="https://www.facebook.com"></a></li>

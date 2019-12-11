@@ -14,11 +14,6 @@ use mysql_xdevapi\Exception;
 
 class Comment extends Model
 {
-//    public $com;
-//    public $user_id;
-//    public $id;
-
-
 
 //    public function users()
 //    {
@@ -73,16 +68,6 @@ class Comment extends Model
 
     }
 
-    public function updateComment($id){
-
-        \DB::table('comments')
-            ->where('id',$id)
-            ->update([
-                'comment' => $this->com
-            ]);
-    }
-
-
     public function getAllReplies(){
 
         return \DB::table('reply')
@@ -92,20 +77,6 @@ class Comment extends Model
             ->join('users','reply.user_id','=','users.id')
             ->get();
     }
-
-
-    public function updateReply($id){
-
-        \DB::table('reply')
-            ->where('id',$id)
-            ->update([
-                'reply' => $this->com
-            ]);
-    }
-
-
-
-
 
 
 }

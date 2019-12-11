@@ -98,7 +98,21 @@ class   CommentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        dd($id);
+        $request->validate([
+            'update_field' => 'required|max:255'
+        ]);
+
+        try{
+            $update_comment = Comment::find($id);
+            $update_comment->comment = $request->update_field;
+
+            $update_comment->save();
+            return redirect()->back()->with('sub_comment_success','Comment updated');
+
+        } catch (\Exception $e) {
+            \Log::critical('Error updating comment '.$e->getMessage());
+            return redirect()->back()->with('show_error','Application is not working, please come back later');
+        }
     }
 
     /**
@@ -124,7 +138,7 @@ class   CommentController extends Controller
             return redirect()->back();
         } catch (\Exception $e) {
             \Log::info('Error deleting comment '.$e->getMessage());
-            dd($e->getMessage());
+//            dd($e->getMessage());
             return redirect()->back()->with('delete_error','Application is not working, please come back later');
         }
     }

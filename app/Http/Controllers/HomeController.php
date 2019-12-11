@@ -49,9 +49,9 @@ class HomeController extends BaseContoller
 //        $commentsPost = Comment::find(30)->users;
 //        dd($commentsPost);
 
-        $this->data['reply'] = $com->getAllReplies();
+        $this->data['replies'] = $com->getAllReplies();
 
-//        dd($this->data['comments']);
+//        dd($this->data['replies']);
 
         $this->data['post'] = Post::where('id',$id)->first();
 
