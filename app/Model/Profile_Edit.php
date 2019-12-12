@@ -32,7 +32,6 @@ class Profile_Edit
 
     }
 
-
     public function EditProfile(){
 
         \DB::table('users')
@@ -45,8 +44,4 @@ class Profile_Edit
             ]);
 
     }
-
-
-
-
 }

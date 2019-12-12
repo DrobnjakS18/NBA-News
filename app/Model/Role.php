@@ -12,6 +12,6 @@ class Role extends Model
 
     public function users()
     {
-        return $this->hasMany('NbaNews\Model\Users','role_id');
+        return $this->hasMany('NbaNews\Model\Users');
     }
 }

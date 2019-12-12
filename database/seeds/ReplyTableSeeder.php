@@ -11,7 +11,7 @@ class ReplyTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('reply')->insert([
+        DB::table('replies')->insert([
             [
                 'reply' => 'Nice',
                 'comment_id' => 1,

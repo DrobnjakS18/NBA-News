@@ -5,6 +5,7 @@ namespace NbaNews\Http\Controllers;
 use Illuminate\Http\Request;
 use NbaNews\Model\Activity;
 use NbaNews\Model\Comment;
+use NbaNews\Model\Reply;
 use NbaNews\Model\Users;
 
 
@@ -131,14 +132,15 @@ class   CommentController extends Controller
             $activities->save();
         } catch (\Exception $e) {
             \Log::critical('Reply activities failed error'.$e->getMessage());
-        }
-
+        };
         try{
-            Comment::destroy($id);
+            $comment = Comment::find($id);
+            $comment->replies()->update(['comment_id' => null]);
+            $comment->delete();
             return redirect()->back();
         } catch (\Exception $e) {
             \Log::info('Error deleting comment '.$e->getMessage());
-//            dd($e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('delete_error','Application is not working, please come back later');
         }
     }

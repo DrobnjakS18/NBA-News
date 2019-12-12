@@ -45,23 +45,21 @@
             <div id="response_tag"></div>
                 <h4>Responses</h4>
             <div class="media response-info">
-                                                {{-- || COMMENT--}}
+                                                                    {{-- || COMMENT--}}
                 @isset($comments)
                 @foreach($comments as $comment)
                 <div class="media-left response-text-left">
                     <a>
-                        <img class="media-object" src="{{asset($comment->profile_pic)}}" alt="{{$comment->alt}}" width="80px"/>
+                        <img class="media-object" src="{{asset($comment->user->profile_pic)}}" alt="profile_pic" width="80px"/>
                     </a>
-                    <h5><a>{{$comment->username}}</a></h5>
+                    <h5><a>{{$comment->user['username']}}</a></h5>
                 </div>
                 <div class="media-body response-text-right ">
                     <div id="comment_ajax_{{$comment->id}}">
                         <p>{{$comment->comment}}</p>
                     </div>
-{{--                    <div id="update_comment_ajax_{{$comment->id}}" style="display: none;"></div>--}}
                     <ul>
                         <li>{{date('M d,Y',strtotime($comment->created_at))}}</li>
-
                         @isset(session('user')->UserId)
                         <li><button class="btn btn-primary" onclick="show({{$comment->id}})" data-id="{{$comment->id}}">Reply</button></li>
                         <div id="rep_form_{{$comment->id}}" style="display: none;">
@@ -71,7 +69,7 @@
                                         @csrf
                                         <textarea rows="4" cols="67" id="text_rep" name="text_rep"></textarea>
                                         <input type="hidden" name="user_id" value="{{session('user')->UserId}}"/>
-                                        <input type="hidden" name="comment_id" value="{{$comment->comment_id}}"/>
+                                        <input type="hidden" name="comment_id" value="{{$comment->id}}"/>
                                         <input type="submit" id="sub_rep" value="Replay"/>
                                     </form>
                                 </div>
@@ -81,7 +79,7 @@
 
                         @if($comment->user_id == session('user')->UserId)
                         <li>
-                            <form action="{{route('comments.destroy',['id'=>$comment->comment_id])}}" method="post">
+                            <form action="{{route('comments.destroy',['id'=>$comment->id])}}" method="post">
                                 @method('DELETE')
                                 @csrf
                                 <button class="btn btn-primary" >Delete</button>
@@ -99,7 +97,7 @@
                                                 <h5 class="modal-title" id="exampleModalLongTitle">Update Comment</h5>
                                             </div>
                                             <div class="modal-body">
-                                                <form action="{{route('comments.update',['id' => $comment->comment_id])}}" method="POST">
+                                                <form action="{{route('comments.update',['id' => $comment->id])}}" method="POST">
                                                     @csrf
                                                     @method('PUT')
                                                     <label for="update-comment"></label>
@@ -118,13 +116,13 @@
                 @endisset
                                                                         {{-- || REPLAY--}}
                         @foreach($replies as $reply)
-                            @if($comment->comment_id == $reply->comment_id)
+                            @if($comment->id == $reply->comment_id)
                         <div class="media response-info">
                             <div class="media-left response-text-left">
                                 <a>
-                                    <img class="media-object" src="{{asset($reply->profile_pic)}}" alt="{{$reply->alt}}"  width="80px"/>
+                                    <img class="media-object" src="{{asset($reply->user->profile_pic)}}" alt="profile_picture" width="80px"/>
                                 </a>
-                                <h5><a href="#">{{$reply->username}}</a></h5>
+                                <h5><a href="#">{{$reply->user['username']}}</a></h5>
                             </div>
                             <div class="media-body response-text-right">
                                 <span id="reply_ajax_{{$reply->id}}"><p>{{$reply->reply}}</p></span>
@@ -134,14 +132,14 @@
                                     @isset(session('user')->UserId)
                                         @if($reply->user_id == session('user')->UserId)
                                         <li>
-                                            <form action="{{route('replies.destroy',['id'=>$reply->reply_id])}}" method="post">
+                                            <form action="{{route('replies.destroy',['id'=>$reply->id])}}" method="post">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-primary" >Delete</button>
                                             </form>
                                         </li>
                                         <li><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#updateReplayModal">Update</button></li>
-                                            <!-- Update Comment Modal -->
+                                            <!-- Update Reply Modal -->
                                             <div class="modal fade" id="updateReplayModal" tabindex="-1" role="dialog" aria-labelledby="updateReplayModal" aria-hidden="true">
                                                 <div class="modal-dialog modal-dialog-centered" role="document">
                                                     <div class="modal-content">
@@ -152,7 +150,7 @@
                                                             <h5 class="modal-title" id="exampleModalLongTitle">Update Reply</h5>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form action="{{route('replies.update',['id' => $reply->reply_id])}}" method="POST">
+                                                            <form action="{{route('replies.update',['id' => $reply->id])}}" method="POST">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <label for="update-comment"></label>
@@ -166,24 +164,6 @@
                                                     </div>
                                                 </div>
                                             </div>
-{{--                                        <div id="updateReplayModal" class="modal fade" role="dialog">--}}
-{{--                                            <div class="modal-dialog">--}}
-{{--                                                <!-- Modal content-->--}}
-{{--                                                <div class="modal-content">--}}
-{{--                                                    <div class="modal-header">--}}
-{{--                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>--}}
-{{--                                                        <h4 class="modal-title">Update Reply</h4>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="modal-body">--}}
-{{--                                                        <textarea rows="4" cols="67" id="update_reply_modal" >{{$reply->reply}}</textarea>--}}
-{{--                                                        <input type="hidden" id="rep_id" value="{{$reply->id}}"/>--}}
-{{--                                                    </div>--}}
-{{--                                                    <div class="modal-footer">--}}
-{{--                                                        <button type="button" class="btn btn-default" data-dismiss="modal" id="btn_modal_reply" onclick="update_rep({{$reply->id}})">Save</button>--}}
-{{--                                                    </div>--}}
-{{--                                                </div>--}}
-{{--                                            </div>--}}
-{{--                                        </div>--}}
                                     @endif
                                         @endisset
                                 </ul>

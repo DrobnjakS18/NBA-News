@@ -4,6 +4,7 @@ namespace NbaNews\Http\Controllers;
 
 use NbaNews\Model\Comment;
 use NbaNews\Model\Post;
+use NbaNews\Model\Reply;
 use NbaNews\Model\Users;
 use NbaNews\Model\VideoModel;
 use Illuminate\Http\Request;
@@ -41,15 +42,12 @@ class HomeController extends BaseContoller
 
         $this->data['count_visits'] = Visit::where('post_id',$id)->count();
         $this->data['count_comments'] = Comment::where('post_id',$id)->count();
+//
+//        $comment = Comment::all();
 
-        $com = new Comment();
+        $this->data['comments'] = Comment::where('post_id',$id)->get();
 
-        $this->data['comments'] =$com->getAllByPost($id);
-
-//        $commentsPost = Comment::find(30)->users;
-//        dd($commentsPost);
-
-        $this->data['replies'] = $com->getAllReplies();
+        $this->data['replies'] = Reply::all();
 
 //        dd($this->data['replies']);
 

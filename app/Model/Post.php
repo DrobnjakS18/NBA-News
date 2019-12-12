@@ -28,23 +28,11 @@ class Post extends Model
         return $this->hasMany('NbaNews\Model\Users');
     }
 
-
-    public function getAllByPost($id){
-
-        return \DB::table('posts as p')
-            ->select('*')
-            ->join('categories as c','p.cat_id','=','c.id_cat')
-            ->where('p.cat_id',$id)
-            ->get();
+    public function comments()
+    {
+        return $this->hasMany('NbaNews\Model\Reply');
     }
 
-    public function getOne($id){
-
-        return \DB::table('posts')
-            ->select('*')
-            ->where('id',$id)
-            ->first();
-    }
 
     public function insertPost(){
 

@@ -29,9 +29,16 @@ class Users extends Model
 //        return $this->belongsToMany('NbaNews\Model\Comment');
 //    }
 
+
+
     public function roles()
     {
         return $this->belongsTo('NbaNews\Model\Role','role_id');
+    }
+
+    public function replies()
+    {
+        return $this->hasMany('NbaNews\Model\Reply','user_id');
     }
 
 
@@ -42,6 +49,21 @@ class Users extends Model
                     'username' => $this->username,'password'=>md5($this->pass),'role_id' => $this->role_id]
             );
     }
+
+    public function log($user,$pass){
+
+        return \DB::table('users as us')
+            ->select('*','us.id as UserId')
+            ->join('role as r','us.role_id','=','r.id')
+            ->where([
+                ['username',$user],
+                ['password',md5($pass)]
+            ])
+            ->first();
+
+
+    }
+
 
     public  function  deleteUser(){
 
@@ -124,22 +146,6 @@ class Users extends Model
                 'profile_pic' => $this->picture,
                 'role_id' => $this->role_id,
             ]);
-    }
-
-
-
-    public function log($user,$pass){
-
-        return \DB::table('users as us')
-            ->select('*','us.id as UserId')
-            ->join('role as r','us.role_id','=','r.id')
-            ->where([
-                ['username',$user],
-                ['password',md5($pass)]
-            ])
-            ->first();
-
-
     }
 
 
