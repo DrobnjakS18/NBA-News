@@ -3,7 +3,9 @@
 html, body{
 font-family: 'Open Sans', sans-serif;
  font-size: 100%;
- background: #FFf;
+ background: #000;
+
+
 }
 
 body a {
@@ -30,9 +32,8 @@ input[type="button"],input[type="submit"],li.parallelogram{
 }
 h1,h2,h3,h4,h5,h6{
    margin:0;
-     font-family: 'Montserrat-Regular';
+    font-family: 'Montserrat-Regular';
    font-weight:700;
-
 }
 p{
 	margin:0;
@@ -106,7 +107,6 @@ ul.top-nag  a.active{
 	right: 2px;
 }
 .logo a p{
-
     color: #fff;
     font-size: 1em;
     font-weight: 700;
@@ -230,6 +230,7 @@ ul.top-nag  a.active{
     background: none;
     background-color:#f26649;
 }
+
 /* Effect 16: fall down */
 .cl-effect-16 a {
 	color: #6f8686;
@@ -320,6 +321,7 @@ nav a:focus {
 	    padding: 2em 1em 1.5em 1em;
 		border-right: 1px solid #ddd;
 }
+
 /*--banner--*/
 #slider2,
 #slider3 {
@@ -393,7 +395,7 @@ nav a:focus {
     margin-top:3%;
 	display:none;
 }
- .callbacks_nav:hover{
+.callbacks_nav:hover{
   	opacity: 0.5;
   }
 .callbacks_nav.next {
