@@ -3,7 +3,7 @@
 html, body{
 font-family: 'Open Sans', sans-serif;
  font-size: 100%;
- background: #000;
+ background: #fff;
 
 
 }
@@ -3320,3 +3320,11 @@ ul.bottom i {
     background: white;
     color: rebeccapurple;
 }
+
+
+/*.media-body button:active {*/
+
+/*    color: #fff;*/
+/*    background-color: #3276b1;*/
+/*    border-color: #285e8e;*/
+/*}*/

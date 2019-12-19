@@ -38,6 +38,7 @@ class ReplyController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'text_rep' => 'required|max:255'
         ]);
@@ -64,9 +65,9 @@ class ReplyController extends Controller
             return redirect()->back();
         } catch (\Exception $e) {
             \Log::critical('CommentCon inser failed error'.$e->getMessage());
+            dd($e->getMessage());
             return redirect()->back()->with('show_error','Application is not working, please come back later');
         }
-
     }
 
     /**
@@ -100,7 +101,20 @@ class ReplyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'reply_field' => 'required|max:255'
+        ]);
+        try{
+            $update_reply = Reply::find($id);
+            $update_reply->reply = $request->reply_field;
+            $update_reply->save();
+
+            return redirect()->back()->with('sub_comment_success','Reply updated');
+        } catch (\Exception $e) {
+            \Log::critical('Error updating comment '.$e->getMessage());
+            dd($e->getMessage());
+            return redirect()->back()->with('show_error','Application is not working, please come back later');
+        }
     }
 
     /**
