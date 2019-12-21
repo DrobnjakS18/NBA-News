@@ -18,6 +18,7 @@ vagrant ssh
 
 6) Instaliramo vendore
 cd /var/www/project/
+sudo apt-get install php7.2-gd
 composer install
 
 
