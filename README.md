@@ -16,15 +16,23 @@ vagrant:vagrant
 ili 
 vagrant ssh
 
-6) Instaliramo vendore 
+6)Instaliramo vendore 
+
 cd /var/www/project/
+
+sudo apt-get install php7.2-gd
+
 composer install
 
 
 7)Set database
+mysql -u root -p
+
+root
+
 CREATE DATABASE nba_news DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_unicode_ci;
 
-8)podesiti .env fajl po ugledu na .env.example fajl.
+8)Napraviti i podesiti .env fajl po ugledu na .env.example fajl.
 
 9)app key uneti uz pomoc komande: 
 php artisan key:generate
